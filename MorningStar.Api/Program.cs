@@ -1,8 +1,8 @@
-using Microsoft.OpenApi.Models;
+ï»¿using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-#region ½«·þÎñÌí¼Óµ½ÈÝÆ÷ÖÐ
+#region å°†æœåŠ¡æ·»åŠ åˆ°å®¹å™¨ä¸­
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
@@ -10,12 +10,12 @@ builder.Services.AddSwaggerGen(options =>
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
-        Title = "³¿ÐÇ²©¿Í ½Ó¿ÚÎÄµµ",
-        Description = "³¿ÐÇ²©¿Í - Â¬½ÜêÉµÄ¸öÈË²©¿Í",
+        Title = "æ™¨æ˜Ÿåšå®¢ æŽ¥å£æ–‡æ¡£",
+        Description = "æ™¨æ˜Ÿåšå®¢ - å¢æ°æ™Ÿçš„ä¸ªäººåšå®¢",
         Contact = new OpenApiContact
         {
             Name = "Lenceas",
-            Url = new Uri("https://lujiesheng.cn/")
+            Url = new Uri("http://lujiesheng.cn/")
         }
     });
 });
@@ -24,16 +24,18 @@ builder.WebHost.UseUrls("http://*:8079");
 
 var app = builder.Build();
 
-#region ÅäÖÃHTTPÇëÇó¹ÜµÀ
+#region é…ç½®HTTPè¯·æ±‚ç®¡é“
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI(options =>
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-        options.RoutePrefix = string.Empty;
-    });
+
 }
+
+app.UseSwagger();
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    options.RoutePrefix = string.Empty;
+});
 
 //app.UseHttpsRedirection();
 

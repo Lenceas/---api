@@ -1,4 +1,4 @@
-namespace MorningStar.Api
+﻿namespace MorningStar.Api
 {
     public class WeatherForecast
     {
