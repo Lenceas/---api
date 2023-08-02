@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorningStar.Api", "MorningStar.Api\MorningStar.Api.csproj", "{767D4F42-874C-4D75-842D-F31B85EA021F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MorningStar.Api", "MorningStar.Api\MorningStar.Api.csproj", "{767D4F42-874C-4D75-842D-F31B85EA021F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorningStar.Infrastructure", "MorningStar.Infrastructure\MorningStar.Infrastructure.csproj", "{B6469BD7-1459-4095-8BFA-A1A27F2C6E2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorningStar.Model", "MorningStar.Model\MorningStar.Model.csproj", "{515BC1FB-1388-4A52-88E9-31E6BF3FD5C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorningStar.Service", "MorningStar.Service\MorningStar.Service.csproj", "{9FD2FE6D-D2E1-4625-8E3E-E2295F8BE838}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorningStar.Repository", "MorningStar.Repository\MorningStar.Repository.csproj", "{4DCE2435-5683-4EB4-93C7-FAAE46D8EA02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MorningStar.Test", "MorningStar.Test\MorningStar.Test.csproj", "{99FEC1AE-EF90-48FE-94E0-AE71238CDF8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,26 @@ Global
 		{767D4F42-874C-4D75-842D-F31B85EA021F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{767D4F42-874C-4D75-842D-F31B85EA021F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{767D4F42-874C-4D75-842D-F31B85EA021F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6469BD7-1459-4095-8BFA-A1A27F2C6E2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6469BD7-1459-4095-8BFA-A1A27F2C6E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6469BD7-1459-4095-8BFA-A1A27F2C6E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6469BD7-1459-4095-8BFA-A1A27F2C6E2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{515BC1FB-1388-4A52-88E9-31E6BF3FD5C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{515BC1FB-1388-4A52-88E9-31E6BF3FD5C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{515BC1FB-1388-4A52-88E9-31E6BF3FD5C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{515BC1FB-1388-4A52-88E9-31E6BF3FD5C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FD2FE6D-D2E1-4625-8E3E-E2295F8BE838}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FD2FE6D-D2E1-4625-8E3E-E2295F8BE838}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FD2FE6D-D2E1-4625-8E3E-E2295F8BE838}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FD2FE6D-D2E1-4625-8E3E-E2295F8BE838}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4DCE2435-5683-4EB4-93C7-FAAE46D8EA02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4DCE2435-5683-4EB4-93C7-FAAE46D8EA02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4DCE2435-5683-4EB4-93C7-FAAE46D8EA02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4DCE2435-5683-4EB4-93C7-FAAE46D8EA02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99FEC1AE-EF90-48FE-94E0-AE71238CDF8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99FEC1AE-EF90-48FE-94E0-AE71238CDF8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99FEC1AE-EF90-48FE-94E0-AE71238CDF8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99FEC1AE-EF90-48FE-94E0-AE71238CDF8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
