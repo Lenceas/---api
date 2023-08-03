@@ -31,10 +31,8 @@ namespace MorningStar.Infrastructure
                             Url = new Uri("http://lujiesheng.cn/")
                         }
                     });
+                    c.OrderActionsBy(o => o.RelativePath);
                 });
-
-                //var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-                //c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 
                 // Api XML
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, "MorningStar.Api.xml");

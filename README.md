@@ -13,7 +13,8 @@
 - [x] 异步`async/await`开发；
 
 中间件模块：
-- [x] 集成`Swagger`做api接口文档；
+- [x] 使用`Swagger`做api接口文档；
+- [x] 使用`Autofac`做依赖注入容器，并提供批量服务注入 ✨；
 
 微服务模块：
 - [x] 可配合`Docker`、`Docker-Compose`实现容器化；
