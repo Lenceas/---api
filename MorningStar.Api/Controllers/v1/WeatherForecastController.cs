@@ -1,24 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using static MorningStar.Infrastructure.CustomApiVersion;
 
-namespace MorningStar.Api.Controllers
+namespace MorningStar.Api.Controllers.v1
 {
+    /// <summary>
+    /// 天气预报接口
+    /// </summary>
     [ApiController]
-    [Route("[controller]")]
+    [Produces("application/json")]
+    [CustomRoute(ApiVersions.v1)]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
+        };
 
         private readonly ILogger<WeatherForecastController> _logger;
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="logger"></param>
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        /// <summary>
+        /// 获取天气预报数据
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
