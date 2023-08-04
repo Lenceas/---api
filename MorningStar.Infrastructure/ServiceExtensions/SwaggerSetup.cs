@@ -41,6 +41,33 @@ namespace MorningStar.Infrastructure
                 // Model XML
                 var xmlModelPath = Path.Combine(AppContext.BaseDirectory, "MorningStar.Model.xml");
                 c.IncludeXmlComments(xmlModelPath);
+
+                // 添加 JWT Token 认证配置到 Swagger
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    Description = "请输入Token，格式为：Bearer xxxxxx（注意中间必须有空格）",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    BearerFormat = "JWT",
+                    Scheme = "Bearer",
+                });
+
+                // 添加安全要求
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] { }
+                    }
+                });
             });
 
             Console.WriteLine($"容器服务：【Swagger】已注册！");
