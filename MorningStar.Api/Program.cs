@@ -1,7 +1,8 @@
 ﻿var builder = WebApplication.CreateBuilder(args);
 
 #region 将服务添加到容器中
-Console.WriteLine("开始注册容器服务...");
+Console.WriteLine();
+Console.WriteLine("************ 开始注册容器服务 ************");
 Console.WriteLine();
 
 // 注册 AppSettings 服务
@@ -12,6 +13,9 @@ builder.Services.AddSwaggerSetup();
 
 // 注册 Authorization 服务
 builder.Services.AddAuthorizationSetup();
+
+// 注册 Sqlsugar 服务
+builder.Services.AddSqlSugarSetup();
 
 // 注册 Autofac 服务
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
@@ -39,20 +43,19 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 
 Console.WriteLine();
-Console.WriteLine("容器服务注册完毕！");
+Console.WriteLine("************ 容器服务注册完毕 ************");
 Console.WriteLine();
 #endregion
 
 var app = builder.Build();
 
 #region 配置HTTP请求管道
-Console.WriteLine("开始启用中间件...");
+Console.WriteLine("************ 开始启用中间件 **************");
 Console.WriteLine();
 
+// 是否开发环境
 if (app.Environment.IsDevelopment())
-{
-
-}
+    app.UseDeveloperExceptionPage();
 
 // 启用 Swagger 中间件
 app.UseSwaggerMiddleware();
@@ -69,8 +72,11 @@ app.UseAuthorization();
 app.MapControllers();
 
 Console.WriteLine();
-Console.WriteLine("中间件启用完毕！");
+Console.WriteLine("************ 中间件启用完毕 **************");
 Console.WriteLine();
+
+// 启用 SqlSugar CodeFirst 中间件
+app.UseSeedDataMilddleware();
 
 app.Run();
 #endregion

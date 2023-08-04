@@ -70,7 +70,7 @@ namespace MorningStar.Infrastructure
                 });
             });
 
-            Console.WriteLine($"容器服务：【Swagger】已注册！");
+            Console.WriteLine("容器服务：【Swagger】已注册！");
         }
     }
 }

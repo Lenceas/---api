@@ -27,7 +27,7 @@ namespace MorningStar.Infrastructure
                 });
             });
 
-            Console.WriteLine($"中间件：【Swagger】已启用！");
+            Console.WriteLine("中间件：【Swagger】已启用！");
         }
     }
 }

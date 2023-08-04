@@ -37,7 +37,7 @@ namespace MorningStar.Infrastructure
                 };
             });
 
-            Console.WriteLine($"容器服务：【Authorization】已注册！");
+            Console.WriteLine("容器服务：【Authorization】已注册！");
         }
     }
 }
