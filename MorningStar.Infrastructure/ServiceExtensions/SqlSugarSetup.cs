@@ -15,10 +15,15 @@ namespace MorningStar.Infrastructure
         /// <param name="services"></param>
         public static void AddSqlSugarSetup(this IServiceCollection services)
         {
+            var connectionString = AppSettings.Get("DataBase:Mysql");
+            if ((Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development").Equals("Production"))
+                connectionString = (Environment.GetEnvironmentVariable("DATABASE_MYSQL") ?? string.Empty).Replace("\"", "");
+            if (string.IsNullOrEmpty(connectionString)) throw new Exception("容器服务：【SqlSugar】注册错误：connectionString为空！");
+            //Console.WriteLine(connectionString);
             var configConnection = new ConnectionConfig()
             {
                 DbType = DbType.MySql,
-                ConnectionString = AppSettings.Get("DataBase:Mysql"),
+                ConnectionString = connectionString,
                 IsAutoCloseConnection = true,
                 ConfigureExternalServices = new ConfigureExternalServices()
                 {

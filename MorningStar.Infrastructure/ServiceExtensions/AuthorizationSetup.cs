@@ -13,6 +13,10 @@ namespace MorningStar.Infrastructure
         public static void AddAuthorizationSetup(this IServiceCollection services)
         {
             var secretKey = AppSettings.Get("Jwt:SecretKey");
+            if ((Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development").Equals("Production"))
+                secretKey = Environment.GetEnvironmentVariable("JWT_SECRETKEY") ?? string.Empty;
+            if (string.IsNullOrEmpty(secretKey)) throw new Exception("容器服务：【Authorization】注册错误：secretKey为空！");
+            //Console.WriteLine(secretKey);
             var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             services.AddAuthentication(options =>
             {
