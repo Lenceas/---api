@@ -1,4 +1,7 @@
-﻿namespace MorningStar.Infrastructure
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+
+namespace MorningStar.Common
 {
     public static class JsonConverterExtension
     {

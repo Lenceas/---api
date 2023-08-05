@@ -2,7 +2,7 @@
 using Autofac.Extras.DynamicProxy;
 using System.Reflection;
 
-namespace MorningStar.Infrastructure
+namespace MorningStar.Extension
 {
     /// <summary>
     /// 注册【Autofac】容器服务

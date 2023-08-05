@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace MorningStar.Infrastructure
+namespace MorningStar.Extension
 {
     /// <summary>
     /// 自定义Api接口版本

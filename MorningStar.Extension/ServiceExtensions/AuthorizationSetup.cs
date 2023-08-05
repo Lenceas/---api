@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace MorningStar.Infrastructure
+namespace MorningStar.Extension
 {
     /// <summary>
     /// Authorization 容器服务

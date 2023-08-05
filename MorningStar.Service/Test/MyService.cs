@@ -1,6 +1,6 @@
 ﻿namespace MorningStar.Service
 {
-    public class MyService : IMyService
+    public class MyService : IBaseService, IMyService
     {
         public void ShowCode()
         {
@@ -8,7 +8,7 @@
         }
     }
 
-    public class MyServiceV2 : IMyService
+    public class MyServiceV2 : IBaseService, IMyService
     {
         public MyNameService? NameService { get; set; }
 

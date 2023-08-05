@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Swashbuckle.AspNetCore.SwaggerUI;
-using static MorningStar.Infrastructure.CustomApiVersion;
 
-namespace MorningStar.Infrastructure
+namespace MorningStar.Extension
 {
     /// <summary>
     /// Swagger 中间件

@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using MorningStar.Model;
+using MorningStar.Service;
 using SqlSugar;
 
-namespace MorningStar.Infrastructure
+namespace MorningStar.Extension
 {
     /// <summary>
     /// Sqlsugar CodeFirst 中间件
@@ -17,7 +19,7 @@ namespace MorningStar.Infrastructure
         {
             try
             {
-                var db = app.ApplicationServices.GetService<SqlSugarScope>() ?? throw new Exception("未获取到SqlSugarScope实例！");
+                var db = app.ApplicationServices.GetService<ISqlSugarClient>() ?? throw new Exception("未获取到SqlSugarScope实例！");
 
                 Console.WriteLine("************ 开始自动初始化数据 **********");
                 Console.WriteLine();
@@ -30,8 +32,11 @@ namespace MorningStar.Infrastructure
                 Console.WriteLine("开始初始化表数据...");
                 Console.WriteLine();
 
-                #region 表
-                // todo:
+                #region 测试表 TestEntity
+                Console.WriteLine($"开始初始化 {CommonHelper.GetClassDescription(typeof(TestEntity))} {nameof(TestEntity)} 数据...");
+                db.CopyNew().CodeFirst.SetStringDefaultLength(255).InitTables(typeof(TestEntity));
+                new TestService().InitDatas();
+                Console.WriteLine($"{CommonHelper.GetClassDescription(typeof(TestEntity))} {nameof(TestEntity)} 数据初始化成功！");
                 #endregion
 
                 Console.WriteLine();

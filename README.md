@@ -4,9 +4,9 @@
 `MorningStar.Api`：表现层  
 `MorningStar.Service`：服务层  
 `MorningStar.Repository`：仓储层  
-`MorningStar.Infrastructure`：基础设施层  
-`MorningStar.Model`：领域模型层  
-`MorningStar.Test`：单元测试层  
+`MorningStar.Common`：公共层  
+`MorningStar.Extension`：扩展层  
+`MorningStar.Model`：模型层  
 
 #### 框架模块：  
 - [x] 采用`仓储+服务+接口`的形式封装框架；

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 
-namespace MorningStar.Infrastructure
+namespace MorningStar
 {
     /// <summary>
     /// appsettings.json 操作类

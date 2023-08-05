@@ -2,7 +2,7 @@
 using SqlSugar;
 using System.Reflection;
 
-namespace MorningStar.Infrastructure
+namespace MorningStar.Extension
 {
     /// <summary>
     /// SqlSugar 容器服务
@@ -50,7 +50,8 @@ namespace MorningStar.Infrastructure
                 }
             };
 
-            var sqlSugar = new SqlSugarScope(configConnection,
+            // Scope模式：SqlSugarClient  
+            var sqlSugar = new SqlSugarClient(configConnection,
                 db =>
                 {
                     // 单例参数配置，所有上下文生效
@@ -61,8 +62,8 @@ namespace MorningStar.Infrastructure
                     };
                 });
 
-            // 这边是SqlSugarScope用AddSingleton
-            services.AddSingleton(sqlSugar);
+            // 注册 SqlSugar 用 AddScoped
+            services.AddScoped<ISqlSugarClient>(s => sqlSugar);
 
             Console.WriteLine("容器服务：【SqlSugar】已注册！");
         }

@@ -1,4 +1,9 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using MorningStar;
+using MorningStar.Repository;
+
+var builder = WebApplication.CreateBuilder(args);
 
 #region 将服务添加到容器中
 Console.WriteLine();
@@ -14,7 +19,13 @@ builder.Services.AddSwaggerSetup();
 // 注册 Authorization 服务
 builder.Services.AddAuthorizationSetup();
 
-// 注册 Sqlsugar 服务
+// 注册 上下文 服务
+builder.Services.AddHttpContextAccessor();
+
+// 注册 SqlSugar 仓储泛型基类 服务
+builder.Services.AddScoped(typeof(SqlSugarRepository<>));
+
+// 注册 SqlSugar 服务
 builder.Services.AddSqlSugarSetup();
 
 // 注册 Autofac 服务
@@ -27,8 +38,7 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
 builder.WebHost.UseUrls("http://*:8079");
 
 builder.Services.AddControllers()
-                // Json 序列化配置
-                .AddNewtonsoftJson(options =>
+                .AddNewtonsoftJson(options =>// Json 序列化配置
                 {
                     // long 类型序列化时转 string
                     options.SerializerSettings.Converters.AddLongTypeConverters();

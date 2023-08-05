@@ -16,12 +16,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MorningStar.Infrastructure\MorningStar.Infrastructure.csproj" />
+    <Folder Include="Sqlsugar\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Sqlsugar\" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.94" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MorningStar.Common\MorningStar.Common.csproj" />
   </ItemGroup>
 
 </Project>

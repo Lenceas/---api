@@ -1,14 +1,15 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 8079
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["MorningStar.Api/MorningStar.Api.csproj", "MorningStar.Api/"]
-COPY ["MorningStar.Infrastructure/MorningStar.Infrastructure.csproj", "MorningStar.Infrastructure/"]
-COPY ["MorningStar.Model/MorningStar.Model.csproj", "MorningStar.Model/"]
+COPY ["MorningStar.Extension/MorningStar.Extension.csproj", "MorningStar.Extension/"]
 COPY ["MorningStar.Service/MorningStar.Service.csproj", "MorningStar.Service/"]
 COPY ["MorningStar.Repository/MorningStar.Repository.csproj", "MorningStar.Repository/"]
+COPY ["MorningStar.Model/MorningStar.Model.csproj", "MorningStar.Model/"]
+COPY ["MorningStar.Common/MorningStar.Common.csproj", "MorningStar.Common/"]
 RUN dotnet restore "MorningStar.Api/MorningStar.Api.csproj"
 COPY . .
 WORKDIR "/src/MorningStar.Api"

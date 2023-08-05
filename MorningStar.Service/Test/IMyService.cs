@@ -1,6 +1,6 @@
 ﻿namespace MorningStar.Service
 {
-    public interface IMyService
+    public interface IMyService : IBaseService
     {
         void ShowCode();
     }
