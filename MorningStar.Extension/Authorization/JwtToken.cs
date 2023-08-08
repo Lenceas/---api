@@ -15,6 +15,11 @@ namespace MorningStar.Extension
         /// <returns></returns>
         public static string GenerateJwtToken(long uid, string name)
         {
+            var secretKey = AppSettings.Get("Jwt:SecretKey");
+            if ((Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development").Equals("Production"))
+                secretKey = Environment.GetEnvironmentVariable("JWT_SECRETKEY") ?? string.Empty;
+            if (string.IsNullOrEmpty(secretKey)) throw new Exception("生成JwtToken错误：secretKey为空！");
+            //Console.WriteLine(secretKey);
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppSettings.Get("Jwt:SecretKey")));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[]
