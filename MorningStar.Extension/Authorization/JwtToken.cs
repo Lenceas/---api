@@ -20,7 +20,7 @@ namespace MorningStar.Extension
                 secretKey = Environment.GetEnvironmentVariable("JWT_SECRETKEY") ?? string.Empty;
             if (string.IsNullOrEmpty(secretKey)) throw new Exception("生成JwtToken错误：secretKey为空！");
             //Console.WriteLine(secretKey);
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(AppSettings.Get("Jwt:SecretKey")));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[]
             {
