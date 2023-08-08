@@ -1,7 +1,7 @@
 ﻿namespace MorningStar.Api.Controllers.v1
 {
     /// <summary>
-    /// 测试接口
+    /// 测试数据接口
     /// </summary>
     [ApiController]
     [Produces("application/json")]
@@ -9,31 +9,38 @@
     [Authorize]
     public class TestWebController : ControllerBase
     {
+        private readonly ITestService _testService;
+
         /// <summary>
         /// 构造函数
         /// </summary>
-        public TestWebController()
+        public TestWebController(ITestService testService)
         {
-
+            _testService = testService;
         }
 
         /// <summary>
-        /// 获取天气预报数据
+        /// 获取测试数据分页
         /// </summary>
+        /// <param name="pageIndex">当前页,默认1</param>
+        /// <param name="pageSize">页大小,默认10</param>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<ApiResult<PageViewModel<TestWebModel>>> GetPage(int pageIndex = 1, int pageSize = 10)
         {
-            string[] Summaries = new[]
+            try
             {
-                "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-            };
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+                return new ApiResult<PageViewModel<TestWebModel>>()
+                {
+                    Code = 200,
+                    Success = true,
+                    Data = await _testService.GetPage(pageIndex, pageSize),
+                };
+            }
+            catch (Exception ex)
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            }).ToArray();
+                return new ApiResult<PageViewModel<TestWebModel>> { Errors = ex.ToString() };
+            }
         }
     }
 }

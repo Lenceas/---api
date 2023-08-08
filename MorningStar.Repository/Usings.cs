@@ -1,2 +1,1 @@
-﻿//global using MorningStar.Infrastructure;
-global using SqlSugar;
+﻿global using SqlSugar;
