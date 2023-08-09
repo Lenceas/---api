@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
+using System.Runtime.InteropServices;
 
 namespace MorningStar.Extension
 {
@@ -22,7 +22,7 @@ namespace MorningStar.Extension
                 {
                     c.SwaggerDoc(version, new OpenApiInfo
                     {
-                        Title = "晨星博客 接口文档",
+                        Title = $"晨星博客 接口文档 —— {RuntimeInformation.FrameworkDescription}",
                         Version = version,
                         Description = "晨星博客 HTTP API " + version,
                         Contact = new OpenApiContact
