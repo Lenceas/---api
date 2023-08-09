@@ -19,7 +19,7 @@
         /// <param name="model">用户登录WebModel</param>
         /// <returns></returns>
         [AllowAnonymous]
-        [HttpPost]        
+        [HttpPost]
         [ProducesResponseType(typeof(TokenWebModel), 200)]
         public IActionResult Login([FromBody] LoginWebModel model)
         {
@@ -30,7 +30,7 @@
 
                 var jwtToken = JwtToken.GenerateJwtToken(99999, "Lenceas");
 
-                return ApiResult(new TokenWebModel()
+                return ApiTResult(new TokenWebModel()
                 {
                     UserID = 99999,
                     UserName = "Lenceas",
@@ -40,7 +40,7 @@
             }
             catch (Exception ex)
             {
-                return ApiErrorResult(ex.ToString());
+                return ApiErrorTResult<TokenWebModel>(ex.Message);
             }
         }
     }

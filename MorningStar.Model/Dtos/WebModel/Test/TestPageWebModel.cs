@@ -1,9 +1,9 @@
 ﻿namespace MorningStar.Model
 {
     /// <summary>
-    /// 测试WebModel
+    /// 测试数据分页WebModel
     /// </summary>
-    public class TestWebModel : BaseDTOModel
+    public class TestPageWebModel : BaseDTOModel
     {
 
     }

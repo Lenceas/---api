@@ -28,6 +28,9 @@ builder.Services.AddScoped(typeof(SqlSugarRepository<>));
 // 注册 SqlSugar 服务
 builder.Services.AddSqlSugarSetup();
 
+// 注册 AutoMapper 服务
+builder.Services.AddAutoMapperSetup();
+
 // 注册 Autofac 服务
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
     .ConfigureContainer<ContainerBuilder>(builder =>

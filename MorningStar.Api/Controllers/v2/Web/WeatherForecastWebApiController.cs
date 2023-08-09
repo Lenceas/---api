@@ -20,7 +20,7 @@
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [ProducesResponseType(typeof(IEnumerable<WeatherForecast>), 200)]
+        [ProducesResponseType(typeof(List<WeatherForecast>), 200)]
         public IActionResult Get()
         {
             try
@@ -29,7 +29,7 @@
                 {
                     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
                 };
-                return ApiResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast
+                return ApiTResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast
                 {
                     Date = DateTime.Now.AddDays(index),
                     TemperatureC = Random.Shared.Next(-20, 55),
@@ -38,7 +38,7 @@
             }
             catch (Exception ex)
             {
-                return ApiErrorResult(ex.ToString());
+                return ApiErrorTResult<List<WeatherForecast>>(ex.Message);
             }
         }
     }

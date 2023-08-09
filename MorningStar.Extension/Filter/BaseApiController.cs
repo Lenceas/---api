@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using MorningStar.Model;
 
 namespace MorningStar.Extension
 {
@@ -39,7 +38,7 @@ namespace MorningStar.Extension
         /// <typeparam name="T">返回数据的类型</typeparam>
         /// <param name="data">返回的数据</param>
         /// <returns>API 返回结果</returns>
-        protected static IActionResult ApiResult<T>(T data)
+        protected static IActionResult ApiTResult<T>(T data)
         {
             return new OkObjectResult(new ApiResult<T>(data));
         }
@@ -51,7 +50,7 @@ namespace MorningStar.Extension
         /// <param name="errorMessage">错误信息</param>
         /// <param name="errorCode">错误状态码，默认为 400</param>
         /// <returns>API 返回结果</returns>
-        protected static IActionResult ApiErrorResult<T>(string errorMessage, int errorCode = 400)
+        protected static IActionResult ApiErrorTResult<T>(string errorMessage, int errorCode = 400)
         {
             return new OkObjectResult(new ApiResult<T>(errorMessage, errorCode));
         }
