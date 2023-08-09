@@ -6,6 +6,29 @@
     public class ApiResult
     {
         /// <summary>
+        /// 构造一个成功的 ApiResult 实例
+        /// </summary>
+        /// <param name="data">返回的数据</param>
+        public ApiResult(object data)
+        {
+            Code = 200;
+            Success = true;
+            Data = data;
+        }
+
+        /// <summary>
+        /// 构造一个失败的 ApiResult 实例
+        /// </summary>
+        /// <param name="errorMessage">错误信息</param>
+        /// <param name="errorCode">错误状态码，默认为 400</param>
+        public ApiResult(string errorMessage, int errorCode = 400)
+        {
+            Code = errorCode;
+            Success = false;
+            Errors = errorMessage;
+        }
+
+        /// <summary>
         /// 状态码
         /// </summary>
         public int Code { get; set; } = 400;
@@ -37,6 +60,29 @@
     /// <typeparam name="T"></typeparam>
     public class ApiResult<T>
     {
+        /// <summary>
+        /// 构造一个成功的 ApiResult 实例
+        /// </summary>
+        /// <param name="data">返回的数据</param>
+        public ApiResult(T data)
+        {
+            Code = 200;
+            Success = true;
+            Data = data;
+        }
+
+        /// <summary>
+        /// 构造一个失败的 ApiResult 实例
+        /// </summary>
+        /// <param name="errorMessage">错误信息</param>
+        /// <param name="errorCode">错误状态码，默认为 400</param>
+        public ApiResult(string errorMessage, int errorCode = 400)
+        {
+            Code = errorCode;
+            Success = false;
+            Errors = errorMessage;
+        }
+
         /// <summary>
         /// 状态码
         /// </summary>
