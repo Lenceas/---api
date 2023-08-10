@@ -28,6 +28,9 @@ builder.Services.AddSwaggerSetup();
 // 注册 MemoryCache 服务
 builder.Services.AddMemoryCacheSetup();
 
+// 注册 IPRateLimit 服务
+builder.Services.AddIPRateLimitSetup(builder.Configuration);
+
 // 注册 SqlSugar 仓储泛型基类 服务
 builder.Services.AddScoped(typeof(SqlSugarRepository<>));
 
@@ -79,15 +82,6 @@ Console.WriteLine();
 if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 
-// 启用 MiniProfiler 中间件
-app.UseMiniProfilerMiddleware();
-
-// 启用 Swagger 中间件
-app.UseSwaggerMiddleware();
-
-// 启用 Cors 中间件
-app.UseCorsMiddleware();
-
 // 启用 静态文件 中间件
 app.UseStaticFiles();
 
@@ -96,6 +90,18 @@ app.UseAuthentication();
 
 // 启用 授权 中间件
 app.UseAuthorization();
+
+// 启用 IPRateLimit 中间件
+app.UseIPRateLimitMiddleware();
+
+// 启用 MiniProfiler 中间件
+app.UseMiniProfilerMiddleware();
+
+// 启用 Swagger 中间件
+app.UseSwaggerMiddleware();
+
+// 启用 Cors 中间件
+app.UseCorsMiddleware();
 
 app.MapControllers();
 

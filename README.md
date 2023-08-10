@@ -22,6 +22,7 @@
 - [x] 使用`AutoMapper`处理对象映射；
 - [x] 支持`CORS`跨域；
 - [x] 封装`JWT`做鉴权；
+- [x] 添加`IpRateLimiting`做 API 限流处理；
 
 微服务模块：
 - [x] 可配合`Docker`、`Docker-Compose`实现容器化；
