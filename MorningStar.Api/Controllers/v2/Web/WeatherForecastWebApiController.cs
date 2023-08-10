@@ -70,20 +70,20 @@
         }
 
         /// <summary>
-        /// 获取分布式内存缓存数据（过期时间：2s；滑动过期时间：2s）
+        /// 获取Redis缓存数据（过期时间：2s；滑动过期时间：2s）
         /// </summary>
         /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(string), 200)]
-        public async Task<IActionResult> GetDistributedCache()
+        public async Task<IActionResult> GetRedisCache()
         {
             try
             {
-                var r = await _dCache.GetStringAsync("DistributedCache");
+                var r = await _dCache.GetStringAsync("Redis");
                 if (string.IsNullOrEmpty(r))
                 {
                     r = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    await _dCache.SetStringAsync("DistributedCache", r
+                    await _dCache.SetStringAsync("Redis", r
                         , new DistributedCacheEntryOptions()
                         {
                             // 设置缓存项的绝对过期时间相对于当前时间的间隔

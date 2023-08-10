@@ -15,6 +15,7 @@
 - [x] 实现项目启动，自动生成种子数据`CodeFirst` ✨； 
 
 中间件模块：
+- [x] 提供`Redis`做缓存处理；
 - [x] 提供`MemoryCache`做缓存处理；
 - [x] 使用`Swagger`做api接口文档；
 - [x] 使用`MiniProfiler`做接口性能分析 ✨；

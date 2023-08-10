@@ -28,6 +28,9 @@ builder.Services.AddSwaggerSetup();
 // 注册 MemoryCache 服务
 builder.Services.AddMemoryCacheSetup();
 
+// 注册 Redis 服务
+builder.Services.AddRedisSetup();
+
 // 注册 IPRateLimit 服务
 builder.Services.AddIPRateLimitSetup(builder.Configuration);
 
@@ -84,6 +87,9 @@ if (app.Environment.IsDevelopment())
 
 // 启用 静态文件 中间件
 app.UseStaticFiles();
+
+// 启用 路由 中间件
+app.UseRouting();
 
 // 启用 认证 中间件
 app.UseAuthentication();
