@@ -10,17 +10,23 @@ Console.WriteLine();
 Console.WriteLine("************ 开始注册容器服务 ************");
 Console.WriteLine();
 
+// 注册 MiniProfiler 服务
+builder.Services.AddMiniProfilerSetup(builder);
+
+// 注册 上下文 服务
+builder.Services.AddHttpContextAccessor();
+
+// 注册 MemoryCache 服务
+builder.Services.AddMemoryCacheSetup();
+
 // 注册 AppSettings 服务
 builder.Services.AddSingleton(new AppSettings());
-
-// 注册 Swagger 服务
-builder.Services.AddSwaggerSetup();
 
 // 注册 Authorization 服务
 builder.Services.AddAuthorizationSetup();
 
-// 注册 上下文 服务
-builder.Services.AddHttpContextAccessor();
+// 注册 Swagger 服务
+builder.Services.AddSwaggerSetup();
 
 // 注册 SqlSugar 仓储泛型基类 服务
 builder.Services.AddScoped(typeof(SqlSugarRepository<>));
@@ -69,6 +75,9 @@ Console.WriteLine();
 // 是否开发环境
 if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
+
+// 启用 MiniProfiler 中间件
+app.UseMiniProfilerMiddleware();
 
 // 启用 Swagger 中间件
 app.UseSwaggerMiddleware();

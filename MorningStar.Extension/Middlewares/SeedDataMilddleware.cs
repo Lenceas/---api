@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using MorningStar.Service;
+﻿using MorningStar.Service;
 using SqlSugar;
 
 namespace MorningStar.Extension

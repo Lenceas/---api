@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using SqlSugar;
+﻿using SqlSugar;
 using System.Reflection;
 
 namespace MorningStar.Extension

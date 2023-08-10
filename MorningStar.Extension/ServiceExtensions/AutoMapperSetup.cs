@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-namespace MorningStar.Extension
+﻿namespace MorningStar.Extension
 {
     /// <summary>
     /// AutoMapper 容器服务

@@ -15,7 +15,9 @@
 - [x] 实现项目启动，自动生成种子数据`CodeFirst` ✨； 
 
 中间件模块：
+- [x] 使用`MemoryCache`做缓存处理；
 - [x] 使用`Swagger`做api接口文档；
+- [x] 使用`MiniProfiler`做接口性能分析 ✨；
 - [x] 使用`Autofac`做依赖注入容器，并提供批量服务注入 ✨；
 - [x] 使用`AutoMapper`处理对象映射；
 - [x] 使用`JWT`做鉴权；
