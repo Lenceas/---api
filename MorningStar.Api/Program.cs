@@ -40,6 +40,9 @@ builder.Services.AddScoped(typeof(SqlSugarRepository<>));
 // 注册 SqlSugar 服务
 builder.Services.AddSqlSugarSetup();
 
+// 注册 MongoDB 服务
+builder.Services.AddMongoDBSetup();
+
 // 注册 AutoMapper 服务
 builder.Services.AddAutoMapperSetup();
 
