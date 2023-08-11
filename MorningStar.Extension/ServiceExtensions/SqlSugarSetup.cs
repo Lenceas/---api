@@ -24,6 +24,7 @@ namespace MorningStar.Extension
                 DbType = DbType.MySql,
                 ConnectionString = connectionString,
                 IsAutoCloseConnection = true,
+                LanguageType = LanguageType.Chinese,
                 ConfigureExternalServices = new ConfigureExternalServices()
                 {
                     EntityNameService = (type, entity) =>

@@ -4,12 +4,12 @@ using SqlSugar;
 namespace MorningStar.Extension
 {
     /// <summary>
-    /// Sqlsugar CodeFirst 中间件
+    /// Sqlsugar CodeFirst 数据种子
     /// </summary>
     public static class SeedDataMilddleware
     {
         /// <summary>
-        /// 启用【Sqlsugar CodeFirst】中间件
+        /// 生成【Sqlsugar CodeFirst】数据种子
         /// </summary>
         /// <param name="app"></param>
         public static void UseSeedDataMilddleware(this IApplicationBuilder app)
@@ -18,6 +18,7 @@ namespace MorningStar.Extension
             {
                 var db = app.ApplicationServices.GetService<ISqlSugarClient>() ?? throw new Exception("未获取到SqlSugarScope实例！");
 
+                Console.WriteLine();
                 Console.WriteLine("************ 开始自动初始化数据 **********");
                 Console.WriteLine();
 
@@ -41,14 +42,12 @@ namespace MorningStar.Extension
                 Console.WriteLine();
 
                 Console.WriteLine("************ 自动初始化数据完成 **********");
-                Console.WriteLine();
             }
             catch (Exception ex)
             {
-                throw new Exception("中间件：【SqlSugar CodeFirst】启用错误：" + ex.Message);
+                throw new Exception("数据种子：【SqlSugar CodeFirst】生成错误：" + ex.Message);
             }
 
-            Console.WriteLine("中间件：【SqlSugar CodeFirst】已启用！");
         }
     }
 }

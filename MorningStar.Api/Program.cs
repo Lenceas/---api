@@ -81,6 +81,9 @@ var app = builder.Build();
 Console.WriteLine("************ 开始启用中间件 **************");
 Console.WriteLine();
 
+// 初始化全局 App 实例
+App.Initialize(app.Services);
+
 // 是否开发环境
 if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
@@ -109,14 +112,15 @@ app.UseSwaggerMiddleware();
 // 启用 Cors 中间件
 app.UseCorsMiddleware();
 
+// 生成 SqlSugar CodeFirst 数据种子
+app.UseSeedDataMilddleware();
+
+// 启用 映射控制器 中间件
 app.MapControllers();
 
 Console.WriteLine();
 Console.WriteLine("************ 中间件启用完毕 **************");
 Console.WriteLine();
-
-// 启用 SqlSugar CodeFirst 中间件
-app.UseSeedDataMilddleware();
 
 app.Run();
 
