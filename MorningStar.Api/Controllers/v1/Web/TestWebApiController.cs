@@ -45,7 +45,7 @@
             }
             catch (Exception ex)
             {
-                return ApiErrorTResult<PageViewModel<TestPageWebModel>>(ex.Message);
+                return ApiErrorResult(ex.Message);
             }
         }
 
@@ -64,7 +64,7 @@
             }
             catch (Exception ex)
             {
-                return ApiErrorTResult<TestDetailWebModel>(ex.Message);
+                return ApiErrorResult(ex.Message);
             }
         }
 

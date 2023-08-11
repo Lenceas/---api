@@ -40,7 +40,7 @@
             }
             catch (Exception ex)
             {
-                return ApiErrorTResult<TokenWebModel>(ex.Message);
+                return ApiErrorResult(ex.Message);
             }
         }
     }

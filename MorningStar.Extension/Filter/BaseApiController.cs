@@ -22,17 +22,6 @@ namespace MorningStar.Extension
         }
 
         /// <summary>
-        /// 返回一个失败的 API 结果
-        /// </summary>
-        /// <param name="errorMessage">错误信息</param>
-        /// <param name="errorCode">错误状态码，默认为 400</param>
-        /// <returns>API 返回结果</returns>
-        protected static IActionResult ApiErrorResult(string errorMessage, int errorCode = 400)
-        {
-            return new OkObjectResult(new ApiResult(errorMessage, errorCode));
-        }
-
-        /// <summary>
         /// 返回一个成功的 API 结果
         /// </summary>
         /// <typeparam name="T">返回数据的类型</typeparam>
@@ -42,6 +31,17 @@ namespace MorningStar.Extension
         {
             return new OkObjectResult(new ApiResult<T>(data));
         }
+
+        /// <summary>
+        /// 返回一个失败的 API 结果
+        /// </summary>
+        /// <param name="errorMessage">错误信息</param>
+        /// <param name="errorCode">错误状态码，默认为 400</param>
+        /// <returns>API 返回结果</returns>
+        protected static IActionResult ApiErrorResult(string errorMessage, int errorCode = 400)
+        {
+            return new OkObjectResult(new ApiResult(errorMessage, errorCode));
+        }        
 
         /// <summary>
         /// 返回一个失败的 API 结果

@@ -42,7 +42,7 @@
             }
             catch (Exception ex)
             {
-                return ApiErrorTResult<List<WeatherForecast>>(ex.Message);
+                return ApiErrorResult(ex.Message);
             }
         }
 
