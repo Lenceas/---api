@@ -59,7 +59,8 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
 builder.WebHost.UseUrls("http://*:8079");
 
 builder.Services.AddControllers()
-                .AddNewtonsoftJson(options =>// Json 序列化配置
+                // Json 序列化配置
+                .AddNewtonsoftJson(options =>
                 {
                     // long 类型序列化时转 string
                     options.SerializerSettings.Converters.AddLongTypeConverters();
