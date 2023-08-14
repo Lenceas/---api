@@ -61,7 +61,7 @@
                     entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(2);
                     await Task.Delay(TimeSpan.FromSeconds(0));
                     return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                }));
+                }) ?? string.Empty);
             }
             catch (Exception ex)
             {
