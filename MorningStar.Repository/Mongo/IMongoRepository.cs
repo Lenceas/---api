@@ -1,4 +1,5 @@
-﻿using MorningStar.Model;
+﻿using MongoDB.Driver;
+using MorningStar.Model;
 using System.Linq.Expressions;
 
 namespace MorningStar.Repository
@@ -12,29 +13,38 @@ namespace MorningStar.Repository
         /// <summary>
         /// 根据主键匹配
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">主键</param>
         /// <returns></returns>
         Task<T> GetByIdAsync(long id);
 
         /// <summary>
-        /// 根据筛选条件匹配
+        /// 获取单个
         /// </summary>
         /// <param name="filter">筛选条件</param>
         /// <returns></returns>
-        Task<List<T>> GetAsync(Expression<Func<T, bool>> filter);
+        Task<T> GetSingleAsync(Expression<Func<T, bool>> filter);
+
+        /// <summary>
+        /// 获取列表
+        /// </summary>
+        /// <param name="filter">筛选条件</param>
+        /// <param name="orderBy">排序</param>
+        /// <returns></returns>
+        Task<List<T>> GetListAsync(Expression<Func<T, bool>> filter, SortDefinition<T>? orderBy = null);
 
         /// <summary>
         /// 获取分页
         /// </summary>
         /// <param name="pageIndex">当前页</param>
         /// <param name="pageSize">页大小</param>
+        /// <param name="orderBy">排序</param>
         /// <returns></returns>
-        Task<PageViewModel<T>> GetPageAsync(int pageIndex, int pageSize);
+        Task<PageViewModel<T>> GetPageAsync(int pageIndex, int pageSize, SortDefinition<T>? orderBy = null);
 
         /// <summary>
         /// 获取所有
         /// </summary>
-        Task<List<T>> GetAllAsync();
+        Task<List<T>> GetAllListAsync();
 
         /// <summary>
         /// 新增实体

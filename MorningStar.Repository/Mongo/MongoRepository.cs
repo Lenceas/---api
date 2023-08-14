@@ -26,7 +26,7 @@ namespace MorningStar.Repository
         /// <summary>
         /// 根据主键匹配
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">主键</param>
         /// <returns></returns>
         public async Task<T> GetByIdAsync(long id)
         {
@@ -34,13 +34,27 @@ namespace MorningStar.Repository
         }
 
         /// <summary>
-        /// 根据筛选条件匹配
+        /// 获取单个
         /// </summary>
         /// <param name="filter">筛选条件</param>
         /// <returns></returns>
-        public async Task<List<T>> GetAsync(Expression<Func<T, bool>> filter)
+        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> filter)
         {
-            return await _collection.Find(filter).ToListAsync();
+            var query = _collection.Find(filter);
+            return await query.SingleOrDefaultAsync();
+        }
+
+        /// <summary>
+        /// 获取列表
+        /// </summary>
+        /// <param name="filter">筛选条件</param>
+        /// <param name="orderBy">排序</param>
+        /// <returns></returns>
+        public async Task<List<T>> GetListAsync(Expression<Func<T, bool>> filter, SortDefinition<T>? orderBy = null)
+        {
+            var query = _collection.Find(filter);
+            if (orderBy != null) query = query.Sort(orderBy);
+            return await query.ToListAsync();
         }
 
         /// <summary>
@@ -48,14 +62,16 @@ namespace MorningStar.Repository
         /// </summary>
         /// <param name="pageIndex">当前页</param>
         /// <param name="pageSize">页大小</param>
+        /// <param name="orderBy">排序</param>
         /// <returns></returns>
-        public async Task<PageViewModel<T>> GetPageAsync(int pageIndex, int pageSize)
+        public async Task<PageViewModel<T>> GetPageAsync(int pageIndex, int pageSize, SortDefinition<T>? orderBy = null)
         {
             var totalCount = await _collection.CountDocumentsAsync(_ => true);
-            var items = await _collection.Find(_ => true)
-                                         .Skip((pageIndex - 1) * pageSize)
-                                         .Limit(pageSize)
-                                         .ToListAsync();
+            var query = _collection.Find(_ => true);
+            if (orderBy != null) query = query.Sort(orderBy);
+            var items = await query.Skip((pageIndex - 1) * pageSize)
+                                   .Limit(pageSize)
+                                   .ToListAsync();
             return new PageViewModel<T>
             {
                 ViewModelList = items,
@@ -69,7 +85,7 @@ namespace MorningStar.Repository
         /// 获取所有
         /// </summary>
         /// <returns></returns>
-        public async Task<List<T>> GetAllAsync()
+        public async Task<List<T>> GetAllListAsync()
         {
             return await _collection.Find(_ => true).ToListAsync();
         }

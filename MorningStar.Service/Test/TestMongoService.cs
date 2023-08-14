@@ -23,7 +23,7 @@
         /// </summary>
         public void InitDatas()
         {
-            var list = GetAllAsync().GetAwaiter().GetResult();
+            var list = GetAllListAsync().GetAwaiter().GetResult();
             if (!list.Any())
             {
                 for (int i = 1; i < 25; i++)
@@ -40,8 +40,9 @@
         /// <param name="pageSize">页大小</param>
         /// <returns></returns>
         public async Task<PageViewModel<TestMongoEntity>> GetPage(int pageIndex, int pageSize)
-        {
-            return await GetPageAsync(pageIndex, pageSize);
+        {            
+            var sort = Builders<TestMongoEntity>.Sort.Ascending(_ => _.OrderIndex);
+            return await GetPageAsync(pageIndex, pageSize, sort);
         }
 
         /// <summary>
@@ -63,7 +64,7 @@
         {
             if (model.ID == 0)// 新增
             {
-                var list = await GetAllAsync();
+                var list = await GetAllListAsync();
                 var maxID = list?.Max(_ => _.ID) ?? 0;
                 await InsertAsync(new TestMongoEntity() { ID = maxID + 1 });
             }
