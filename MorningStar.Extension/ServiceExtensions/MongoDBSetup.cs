@@ -13,6 +13,7 @@ namespace MorningStar.Extension
         /// <param name="services"></param>
         public static void AddMongoDBSetup(this IServiceCollection services)
         {
+            // 注册 IMongoClient 单例
             services.AddSingleton<IMongoClient>(provider =>
             {
                 var connectionString = AppSettings.Get("DataBase:Mongo:ConnectionString");
@@ -23,13 +24,12 @@ namespace MorningStar.Extension
                 return new MongoClient(connectionString);
             });
 
+            // 注册 IMongoDatabase 作用域
             services.AddScoped(provider =>
             {
                 var client = provider.GetRequiredService<IMongoClient>();
                 return client.GetDatabase(AppSettings.Get("DataBase:Mongo:DatabaseName"));
             });
-
-            Console.WriteLine("容器服务：【MongoDB】已注册！");
         }
     }
 }

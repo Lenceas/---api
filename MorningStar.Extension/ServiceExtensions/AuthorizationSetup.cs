@@ -39,8 +39,6 @@ namespace MorningStar.Extension
                     RequireExpirationTime = true,
                 };
             });
-
-            Console.WriteLine("容器服务：【Authorization】已注册！");
         }
     }
 }

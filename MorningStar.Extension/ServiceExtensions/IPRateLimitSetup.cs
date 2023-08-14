@@ -25,8 +25,6 @@ namespace MorningStar.Extension
             services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
             // 注册 IRateLimitConfiguration 接口的单例实现，它将保存速率限制的配置信息。这可以确保在应用程序的不同部分共享相同的配置。
             services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
-
-            Console.WriteLine("容器服务：【IPRateLimit】已注册！");
         }
     }
 }

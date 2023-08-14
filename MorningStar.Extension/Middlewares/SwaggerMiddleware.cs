@@ -41,8 +41,6 @@ namespace MorningStar.Extension
                     </script>";
                 });
             });
-
-            Console.WriteLine("中间件：【Swagger】已启用！");
         }
     }
 }

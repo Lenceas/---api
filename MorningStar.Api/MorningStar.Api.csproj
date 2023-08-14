@@ -32,6 +32,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Controllers\v2\Base\" />
+	  <Folder Include="wwwroot\Logs\" />
 	</ItemGroup>
 
 	<ItemGroup>

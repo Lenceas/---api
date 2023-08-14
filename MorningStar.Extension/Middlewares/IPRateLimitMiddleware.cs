@@ -14,8 +14,6 @@ namespace MorningStar.Extension
         public static void UseIPRateLimitMiddleware(this IApplicationBuilder app)
         {
             app.UseIpRateLimiting();
-
-            Console.WriteLine("中间件：【IPRateLimit】已启用！");
         }
     }
 }

@@ -28,8 +28,6 @@ namespace MorningStar.Extension
                 // 设置性能分析数据在弹出式界面中是否显示每个步骤的执行时间，包括子步骤的执行时间。
                 options.PopupShowTimeWithChildren = true;
             });
-
-            Console.WriteLine("容器服务：【MiniProfiler】已注册！");
         }
     }
 }

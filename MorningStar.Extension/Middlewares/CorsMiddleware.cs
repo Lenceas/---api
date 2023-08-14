@@ -12,8 +12,6 @@
         public static void UseCorsMiddleware(this IApplicationBuilder app)
         {
             app.UseCors(AppSettings.Get("Cors:PolicyName"));
-
-            Console.WriteLine("中间件：【Cors】已启用！");
         }
     }
 }

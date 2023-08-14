@@ -5,12 +5,14 @@
     /// </summary>    
     public class BaseAuthApiController : BaseApiController
     {
+        private readonly Serilog.ILogger _logger;
+
         /// <summary>
         /// 构造函数
         /// </summary>
-        public BaseAuthApiController()
+        public BaseAuthApiController(Serilog.ILogger logger)
         {
-
+            _logger = logger;
         }
 
         /// <summary>
@@ -40,6 +42,7 @@
             }
             catch (Exception ex)
             {
+                _logger.Error(ex, "BaseAuth/Login");
                 return ApiErrorResult(ex.Message);
             }
         }

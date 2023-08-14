@@ -19,8 +19,6 @@
 
             // 注册 AutoMapper 单例服务
             services.AddSingleton(mapper);
-
-            Console.WriteLine("容器服务：【AutoMapper】已注册！");
         }
     }
 }

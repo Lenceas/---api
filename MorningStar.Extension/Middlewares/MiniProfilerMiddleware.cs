@@ -12,8 +12,6 @@
         public static void UseMiniProfilerMiddleware(this IApplicationBuilder app)
         {
             app.UseMiniProfiler();
-
-            Console.WriteLine("中间件：【MiniProfiler】已启用！");
         }
     }
 }

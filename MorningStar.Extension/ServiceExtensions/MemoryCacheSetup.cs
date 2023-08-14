@@ -16,8 +16,6 @@
 
             // 分布式内存缓存
             services.AddDistributedMemoryCache();
-
-            Console.WriteLine("容器服务：【MemoryCache】已注册！");
         }
     }
 }

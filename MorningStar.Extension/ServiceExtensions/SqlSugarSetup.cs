@@ -64,8 +64,6 @@ namespace MorningStar.Extension
 
             // 注册 SqlSugar 用 AddScoped
             services.AddScoped<ISqlSugarClient>(s => sqlSugar);
-
-            Console.WriteLine("容器服务：【SqlSugar】已注册！");
         }
     }
 }

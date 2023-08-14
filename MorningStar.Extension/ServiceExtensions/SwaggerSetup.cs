@@ -68,8 +68,6 @@ namespace MorningStar.Extension
                     }
                 });
             });
-
-            Console.WriteLine("容器服务：【Swagger】已注册！");
         }
     }
 }

@@ -37,8 +37,6 @@
                     });
                 }
             });
-
-            Console.WriteLine("容器服务：【Cors】已注册！");
         }
     }
 }

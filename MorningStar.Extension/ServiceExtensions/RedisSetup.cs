@@ -23,8 +23,6 @@
                 // 键名前缀
                 options.InstanceName = AppSettings.Get("Redis:InstanceName");
             });
-
-            Console.WriteLine("容器服务：【Redis】已注册！");
         }
     }
 }

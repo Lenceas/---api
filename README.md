@@ -13,7 +13,7 @@
 - [x] 异步`async/await`开发；
 - [x] 接入国产数据库ORM组件 —— `SqlSugar`，封装数据库操作，支持级联操作；
 - [x] 接入非关系型数据库 —— `MongoDB`，封装数据库操作；
-- [x] 实现项目启动，自动生成种子数据`CodeFirst` ✨； 
+- [x] 实现项目启动，`CodeFirst` 自动生成初始化数据✨； 
 
 中间件模块：
 - [x] 提供`Redis`做缓存处理；
@@ -22,8 +22,9 @@
 - [x] 使用`MiniProfiler`做接口性能分析 ✨；
 - [x] 使用`Autofac`做依赖注入容器，并提供批量服务注入 ✨；
 - [x] 使用`AutoMapper`处理对象映射；
-- [x] 支持`CORS`跨域；
+- [x] 使用`Serilog`日志框架做日志记录；
 - [x] 封装`JWT`做鉴权；
+- [x] 支持`CORS`跨域；
 - [x] 添加`IpRateLimiting`做 API 限流处理；
 - [x] 添加`SnowFlakeID`雪花ID生成实体唯一主键；
 
