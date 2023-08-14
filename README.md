@@ -25,6 +25,7 @@
 - [x] 支持`CORS`跨域；
 - [x] 封装`JWT`做鉴权；
 - [x] 添加`IpRateLimiting`做 API 限流处理；
+- [x] 添加`SnowFlakeID`雪花ID生成实体唯一主键；
 
 微服务模块：
 - [x] 可配合`Docker`、`Docker-Compose`实现容器化；
