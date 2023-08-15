@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using Serilog.Formatting.Compact;
 
 namespace MorningStar.Extension
 {
@@ -26,6 +27,8 @@ namespace MorningStar.Extension
                                .Enrich.FromLogContext()
                                // 将日志消息输出到控制台。
                                .WriteTo.Console()
+                               //.WriteTo.Console(new CompactJsonFormatter())
+                               //.WriteTo.Console(new RenderedCompactJsonFormatter())
                                // 将日志消息写入文件。你可以指定文件路径、文件名、文件滚动策略等。
                                .WriteTo.File(Path.Combine($"{webHostEnvironment.WebRootPath}/Logs/", "MorningStar.log"),
                                              rollingInterval: RollingInterval.Day,
