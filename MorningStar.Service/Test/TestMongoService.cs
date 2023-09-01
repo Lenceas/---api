@@ -8,7 +8,7 @@
         /// <summary>
         /// 构造函数
         /// </summary>
-        public TestMongoService() : base(nameof(TestMongoEntity).Replace("Entity", ""))
+        public TestMongoService() : base(nameof(TestMongoEntity))
         {
 
         }
@@ -40,7 +40,7 @@
         /// <param name="pageSize">页大小</param>
         /// <returns></returns>
         public async Task<PageViewModel<TestMongoEntity>> GetPage(int pageIndex, int pageSize)
-        {            
+        {
             var sort = Builders<TestMongoEntity>.Sort.Ascending(_ => _.OrderIndex);
             return await GetPageAsync(pageIndex, pageSize, sort);
         }

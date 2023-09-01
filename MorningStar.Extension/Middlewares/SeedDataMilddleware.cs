@@ -57,6 +57,12 @@ namespace MorningStar.Extension
                 log.Information($"{CommonHelper.GetClassDescription(typeof(TestMongoEntity))} {nameof(TestMongoEntity)} 数据初始化成功！");
                 #endregion
 
+                #region 用户表 UserEntity
+                log.Information($"开始初始化 {CommonHelper.GetClassDescription(typeof(UserEntity))} {nameof(UserEntity)} 数据...");
+                new UserService().InitDatas();
+                log.Information($"{CommonHelper.GetClassDescription(typeof(UserEntity))} {nameof(UserEntity)} 数据初始化成功！");
+                #endregion
+
                 #endregion
 
                 Console.WriteLine();

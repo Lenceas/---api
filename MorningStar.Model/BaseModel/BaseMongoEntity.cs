@@ -13,51 +13,61 @@ namespace MorningStar.Model
         /// </summary>
         [BsonId]
         [BsonRepresentation(BsonType.Int64)]
+        [Description("主键")]
         public long ID { get; set; }
 
         /// <summary>
         /// 备注
         /// </summary>
+        [Description("备注")]
         public string Remark { get; set; } = string.Empty;
 
         /// <summary>
-        /// 排序下标, 越小越靠前 (只针对同级有效, 不夸层)
+        /// 排序下标（越小越靠前,只针对同级有效,不跨层）
         /// </summary>
+        [Description("排序下标")]
         public short OrderIndex { get; set; } = 999;
 
         /// <summary>
         /// 报表日期
         /// </summary>
+        [Description("报表日期")]
         public DateTime ReportDate { get; set; } = DateTime.Today.ToUniversalTime();
 
         /// <summary>
         /// 修改人ID
         /// </summary>
+        [Description("修改人ID")]
         public long MID { get; set; }
 
         /// <summary>
         /// 修改人
         /// </summary>
+        [Description("修改人")]
         public string MName { get; set; } = string.Empty;
 
         /// <summary>
         /// 修改时间(UTC)
         /// </summary>
+        [Description("修改时间(UTC)")]
         public DateTime MTime { get; set; } = DateTime.UtcNow;
 
         /// <summary>
         /// 创建人ID
         /// </summary>
+        [Description("创建人ID")]
         public long CID { get; set; }
 
         /// <summary>
         /// 创建人
         /// </summary>
+        [Description("创建人")]
         public string CName { get; set; } = string.Empty;
 
         /// <summary>
         /// 创建时间(UTC)
         /// </summary>
+        [Description("创建时间(UTC)")]
         public DateTime CTime { get; set; } = DateTime.UtcNow;
     }
 }

@@ -19,8 +19,9 @@ namespace MorningStar.Repository
         /// <param name="db">IMongoDatabase 操作实例</param>
         public MongoRepository(string collectionName, IMongoDatabase? db = null)
         {
-            db = App.GetService<IMongoDatabase>();
-            _collection = db.GetCollection<T>(collectionName);
+            db ??= App.GetService<IMongoDatabase>();
+            // 自动截取表名，保留前面的部分
+            _collection = db.GetCollection<T>(collectionName.Replace("Entity", ""));
         }
 
         /// <summary>
