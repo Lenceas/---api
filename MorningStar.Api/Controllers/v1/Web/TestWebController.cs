@@ -4,7 +4,7 @@
     /// 测试数据接口
     /// </summary>
     [AllowAnonymous]
-    public class TestWebApiController : BaseApiController
+    public class TestWebController : BaseApiController
     {
         private readonly Serilog.ILogger _logger;
         private readonly IMapper _mapper;
@@ -16,7 +16,7 @@
         /// <summary>
         /// 构造函数
         /// </summary>
-        public TestWebApiController(Serilog.ILogger logger, IMapper mapper, IMemoryCache mCache, IDistributedCache dCache, ITestService testService, ITestMongoService testMongoService)
+        public TestWebController(Serilog.ILogger logger, IMapper mapper, IMemoryCache mCache, IDistributedCache dCache, ITestService testService, ITestMongoService testMongoService)
         {
             _logger = logger;
             _mapper = mapper;

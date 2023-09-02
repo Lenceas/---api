@@ -27,7 +27,7 @@ namespace MorningStar.Extension
         /// </summary>
         /// <param name="actionName"></param>
         /// <param name="version"></param>
-        public CustomRouteAttribute(ApiVersions version, string actionName = "[action]") : base($"/api/{version.ToString()}/[controller]/{actionName}")
+        public CustomRouteAttribute(ApiVersions version, string actionName = "[action]") : base($"/api/{version}/[controller]/{actionName}")
         {
             GroupName = version.ToString();
         }

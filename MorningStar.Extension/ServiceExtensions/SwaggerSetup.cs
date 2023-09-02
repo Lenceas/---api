@@ -64,7 +64,7 @@ namespace MorningStar.Extension
                                 Id = "Bearer"
                             }
                         },
-                        new string[] { }
+                        Array.Empty<string>()
                     }
                 });
             });

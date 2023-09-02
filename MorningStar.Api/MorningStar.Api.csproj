@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
@@ -33,6 +33,7 @@
 	<ItemGroup>
 	  <Folder Include="Controllers\v2\Base\" />
 	  <Folder Include="wwwroot\Logs\" />
+	  <Folder Include="wwwroot\Fonts\" />
 	</ItemGroup>
 
 	<ItemGroup>

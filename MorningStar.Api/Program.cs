@@ -112,7 +112,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 
 // 初始化全局 App 实例
-App.Initialize(app.Services, app.Services.GetRequiredService<IHttpContextAccessor>());
+App.Initialize(app.Services, app.Services.GetRequiredService<IHttpContextAccessor>(), app.Environment);
 log.Information("中间件：【App】已启用！");
 
 // 启用 静态文件 中间件

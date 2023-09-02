@@ -30,6 +30,9 @@
         /// <summary>
         /// 验证码
         /// </summary>
+        [Required(ErrorMessage = "必填")
+            , MinLength(4, ErrorMessage = "请输入4验证码！")
+            , MaxLength(4, ErrorMessage = "请输入4验证码！")]
         public string Captcha { get; set; } = string.Empty;
     }
 }

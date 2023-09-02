@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MorningStar
@@ -10,16 +11,18 @@ namespace MorningStar
     {
         private static IServiceProvider? _serviceProvider;
         private static IHttpContextAccessor? _httpContext;
+        private static IWebHostEnvironment? _webHostEnvironment;
 
         /// <summary>
         /// 初始化全局 App 实例，必须在应用程序启动时调用
         /// </summary>
         /// <param name="serviceProvider">依赖注入容器</param>
         /// <param name="httpContextAccessor">上下文对象</param>
-        public static void Initialize(IServiceProvider serviceProvider, IHttpContextAccessor httpContextAccessor)
+        public static void Initialize(IServiceProvider serviceProvider, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment webHostEnvironment)
         {
             _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
             _httpContext = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
+            _webHostEnvironment = webHostEnvironment ?? throw new ArgumentNullException(nameof(webHostEnvironment));
         }
 
         /// <summary>
@@ -36,6 +39,15 @@ namespace MorningStar
             }
 
             return _serviceProvider.GetRequiredService<T>();
+        }
+
+        /// <summary>
+        /// 获取Web主机环境，如，是否是开发环境，生产环境等
+        /// </summary>
+        /// <returns></returns>
+        public static IWebHostEnvironment? WebHostEnvironment()
+        {
+            return _webHostEnvironment;
         }
 
         /// <summary>

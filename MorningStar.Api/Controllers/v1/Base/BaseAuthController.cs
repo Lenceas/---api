@@ -3,7 +3,7 @@
     /// <summary>
     /// 基础权限接口
     /// </summary>    
-    public class BaseAuthApiController : BaseApiController
+    public class BaseAuthController : BaseApiController
     {
         private readonly Serilog.ILogger _logger;
         private readonly IDistributedCache _dCache;
@@ -15,11 +15,35 @@
         /// <param name="logger"></param>
         /// <param name="dCache"></param>
         /// <param name="userService"></param>
-        public BaseAuthApiController(Serilog.ILogger logger, IDistributedCache dCache, IUserService userService)
+        public BaseAuthController(Serilog.ILogger logger, IDistributedCache dCache, IUserService userService)
         {
             _logger = logger;
             _dCache = dCache;
             _userService = userService;
+        }
+
+        /// <summary>
+        /// 获取登录图片验证码
+        /// </summary>
+        /// <param name="id">该次登录唯一标识</param>
+        /// <returns>base64Code</returns>
+        [AllowAnonymous]
+        [HttpGet]
+        [ProducesResponseType(typeof(string), 200)]
+        public async Task<IActionResult> GetLoginVerifyCode([Required] string id)
+        {
+            try
+            {
+                var (code, base64Code) = _userService.GetLoginVerifyCode(4, 116, 46, 22);
+                // 把唯一标识和验证码 缓存到内存并设置过期时间
+                await _dCache.SetStringAsync($"{ConfigHelper.LoginCaptchaRedisKey}{id}", code, new DistributedCacheEntryOptions() { SlidingExpiration = TimeSpan.FromSeconds(60) });
+                return ApiTResult(base64Code);
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "BaseAuth/GetLoginVerifyCode");
+                return ApiErrorResult(ex.Message);
+            }
         }
 
         /// <summary>

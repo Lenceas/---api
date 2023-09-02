@@ -5,14 +5,14 @@
     /// </summary>
     [CustomRoute(ApiVersions.v2)]
     [AllowAnonymous]
-    public class WeatherForecastWebApiController : BaseApiController
+    public class WeatherForecastWebController : BaseApiController
     {
         private readonly Serilog.ILogger _logger;
 
         /// <summary>
         /// 构造函数
         /// </summary>
-        public WeatherForecastWebApiController(Serilog.ILogger logger)
+        public WeatherForecastWebController(Serilog.ILogger logger)
         {
             _logger = logger;
         }
