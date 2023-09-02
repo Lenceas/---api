@@ -14,6 +14,13 @@
         /// 初始化用户数据
         /// </summary>
         void InitDatas();
+
+        /// <summary>
+        /// 用户登录
+        /// </summary>
+        /// <param name="model">用户登录WebModel</param>
+        /// <returns></returns>
+        Task<TokenWebModel> Login(LoginWebModel model);
         #endregion
     }
 }

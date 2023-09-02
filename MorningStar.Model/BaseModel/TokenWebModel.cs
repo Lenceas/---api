@@ -16,6 +16,16 @@
         public string? UserName { get; set; }
 
         /// <summary>
+        /// 角色ID
+        /// </summary>
+        public long RoleID { get; set; }
+
+        /// <summary>
+        /// 角色名称
+        /// </summary>
+        public string? RoleName { get; set; }
+
+        /// <summary>
         /// 令牌
         /// </summary>
         public string? Token { get; set; }

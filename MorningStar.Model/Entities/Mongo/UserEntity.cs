@@ -31,16 +31,16 @@
         public long RoleID { get; set; }
 
         /// <summary>
-        /// 最后登录时间
+        /// 最后登录时间（UTC）
         /// </summary>
         [Description("最后登录时间")]
         public DateTime LastLoginTime { get; set; }
 
         /// <summary>
-        /// 最后登录IP
+        /// 最后登录IPv4
         /// </summary>
-        [Description("最后登录IP")]
-        public string LastLoginIP { get; set; } = string.Empty;
+        [Description("最后登录IPv4")]
+        public string LastLoginIPv4 { get; set; } = string.Empty;
 
         /// <summary>
         /// 最后登录Token

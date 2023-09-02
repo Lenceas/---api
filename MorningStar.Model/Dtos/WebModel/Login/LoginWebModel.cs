@@ -25,7 +25,7 @@
         [Required(ErrorMessage = "必填")
             , MinLength(8, ErrorMessage = "请输入长度不少于8位的密码!")
             , MaxLength(24, ErrorMessage = "请输入长度不多于24位的密码!")]
-        public string PassWord { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
 
         /// <summary>
         /// 验证码

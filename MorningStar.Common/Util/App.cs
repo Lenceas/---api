@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MorningStar
 {
@@ -8,14 +9,17 @@ namespace MorningStar
     public static class App
     {
         private static IServiceProvider? _serviceProvider;
+        private static IHttpContextAccessor? _httpContext;
 
         /// <summary>
         /// 初始化全局 App 实例，必须在应用程序启动时调用
         /// </summary>
         /// <param name="serviceProvider">依赖注入容器</param>
-        public static void Initialize(IServiceProvider serviceProvider)
+        /// <param name="httpContextAccessor">上下文对象</param>
+        public static void Initialize(IServiceProvider serviceProvider, IHttpContextAccessor httpContextAccessor)
         {
             _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            _httpContext = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
         }
 
         /// <summary>
@@ -32,6 +36,42 @@ namespace MorningStar
             }
 
             return _serviceProvider.GetRequiredService<T>();
+        }
+
+        /// <summary>
+        /// 获取本机 IPv4 地址
+        /// </summary>
+        /// <returns></returns>
+        public static string GetLocalIpAddressToIPv4()
+        {
+            return _httpContext?.HttpContext?.Connection.LocalIpAddress?.MapToIPv4()?.ToString() ?? string.Empty;
+        }
+
+        /// <summary>
+        /// 获取本机 IPv6 地址
+        /// </summary>
+        /// <returns></returns>
+        public static string GetLocalIpAddressToIPv6()
+        {
+            return _httpContext?.HttpContext?.Connection.LocalIpAddress?.MapToIPv6()?.ToString() ?? string.Empty;
+        }
+
+        /// <summary>
+        /// 获取远程 IPv4 地址
+        /// </summary>
+        /// <returns></returns>
+        public static string GetRemoteIpAddressToIPv4()
+        {
+            return _httpContext?.HttpContext?.Connection.RemoteIpAddress?.MapToIPv4()?.ToString() ?? string.Empty;
+        }
+
+        /// <summary>
+        /// 获取远程 IPv6 地址
+        /// </summary>
+        /// <returns></returns>
+        public static string GetRemoteIpAddressToIPv6()
+        {
+            return _httpContext?.HttpContext?.Connection.RemoteIpAddress?.MapToIPv6()?.ToString() ?? string.Empty;
         }
     }
 }

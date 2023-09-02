@@ -76,6 +76,11 @@ log.Information("容器服务：【Autofac】已注册！");
 builder.WebHost.UseUrls("http://*:8079");
 
 builder.Services.AddControllers()
+                .AddMvcOptions(options =>
+                {
+                    // 添加模型验证过滤器
+                    options.Filters.Add(new ModelStateValidationFilter());
+                })
                 // Json 序列化配置
                 .AddNewtonsoftJson(options =>
                 {
@@ -107,7 +112,7 @@ if (app.Environment.IsDevelopment())
     app.UseDeveloperExceptionPage();
 
 // 初始化全局 App 实例
-App.Initialize(app.Services);
+App.Initialize(app.Services, app.Services.GetRequiredService<IHttpContextAccessor>());
 log.Information("中间件：【App】已启用！");
 
 // 启用 静态文件 中间件
