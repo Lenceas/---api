@@ -3,24 +3,17 @@
     /// <summary>
     /// 基础权限接口
     /// </summary>    
-    public class BaseAuthController : BaseApiController
+    /// <remarks>
+    /// 构造函数
+    /// </remarks>
+    /// <param name="logger"></param>
+    /// <param name="dCache"></param>
+    /// <param name="userService"></param>
+    public class BaseAuthController(
+        Serilog.ILogger logger,
+        IDistributedCache dCache,
+        IUserService userService) : BaseApiController
     {
-        private readonly Serilog.ILogger _logger;
-        private readonly IDistributedCache _dCache;
-        private readonly IUserService _userService;
-
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="dCache"></param>
-        /// <param name="userService"></param>
-        public BaseAuthController(Serilog.ILogger logger, IDistributedCache dCache, IUserService userService)
-        {
-            _logger = logger;
-            _dCache = dCache;
-            _userService = userService;
-        }
 
         /// <summary>
         /// 获取登录图片验证码
@@ -34,14 +27,14 @@
         {
             try
             {
-                var (code, base64Code) = _userService.GetLoginVerifyCode(4, 116, 46, 22);
+                var (code, base64Code) = userService.GetLoginVerifyCode(4, 116, 46, 22);
                 // 把唯一标识和验证码 缓存到内存并设置过期时间
-                await _dCache.SetStringAsync($"{ConfigHelper.LoginCaptchaRedisKey}{id}", code, new DistributedCacheEntryOptions() { SlidingExpiration = TimeSpan.FromSeconds(60) });
+                await dCache.SetStringAsync($"{ConfigHelper.LoginCaptchaRedisKey}{id}", code, new DistributedCacheEntryOptions() { SlidingExpiration = TimeSpan.FromSeconds(60) });
                 return ApiTResult(base64Code);
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "BaseAuth/GetLoginVerifyCode");
+                logger.Error(ex, "BaseAuth/GetLoginVerifyCode");
                 return ApiErrorResult(ex.Message);
             }
         }
@@ -58,8 +51,8 @@
         {
             try
             {
-                var r = await _userService.Login(model);
-                await _dCache.SetStringAsync($"{ConfigHelper.LoginRedisKey}{r.UserID}", JsonConvert.SerializeObject(r),
+                var r = await userService.Login(model);
+                await dCache.SetStringAsync($"{ConfigHelper.LoginRedisKey}{r.UserID}", JsonConvert.SerializeObject(r),
                     new DistributedCacheEntryOptions()
                     {
                         AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(r.ExpiredMinuteTime)
@@ -68,7 +61,7 @@
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "BaseAuth/Login");
+                logger.Error(ex, "BaseAuth/Login");
                 return ApiErrorResult(ex.Message);
             }
         }
@@ -84,12 +77,12 @@
             try
             {
                 // todo:从当前登录用户拿取用户ID
-                await _dCache.RemoveAsync($"{ConfigHelper.LoginRedisKey}{1024}");
+                await dCache.RemoveAsync($"{ConfigHelper.LoginRedisKey}{1024}");
                 return ApiTResult(true);
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "BaseAuth/Logout");
+                logger.Error(ex, "BaseAuth/Logout");
                 return ApiErrorResult(ex.Message);
             }
         }
