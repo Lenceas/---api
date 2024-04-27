@@ -8,7 +8,7 @@ namespace MorningStar.Repository
     /// MongoDB 仓储接口类
     /// </summary>
     /// <typeparam name="T">泛型实体</typeparam>
-    public interface IMongoRepository<T>
+    public interface IMongoRepository<T> where T : class
     {
         /// <summary>
         /// 根据主键匹配

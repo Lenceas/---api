@@ -17,11 +17,9 @@ namespace MorningStar.Extension
         {
             var cacheType = new List<Type>();
 
-            // todo:
-
             // 注册服务层
-            var assemblysServices = Assembly.Load("MorningStar.Service");
-            builder.RegisterAssemblyTypes(assemblysServices)
+            var assemblyServices = Assembly.Load("MorningStar.Service");
+            builder.RegisterAssemblyTypes(assemblyServices)
                    .AsImplementedInterfaces()
                    .InstancePerDependency()
                    .PropertiesAutowired()
@@ -29,8 +27,8 @@ namespace MorningStar.Extension
                    .InterceptedBy(cacheType.ToArray()); // 允许将拦截器服务的列表分配给注册。
 
             // 注册仓储层
-            var assemblysRepository = Assembly.Load("MorningStar.Repository");
-            builder.RegisterAssemblyTypes(assemblysRepository)
+            var assemblyRepositorys = Assembly.Load("MorningStar.Repository");
+            builder.RegisterAssemblyTypes(assemblyRepositorys)
                    .AsImplementedInterfaces()
                    .PropertiesAutowired()
                    .InstancePerDependency();

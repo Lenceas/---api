@@ -24,11 +24,11 @@
         public void InitDatas()
         {
             var list = GetListAsync().GetAwaiter().GetResult();
-            if (!list.Any())
+            if (list.Count == 0)
             {
                 for (int i = 1; i < 25; i++)
                     list.Add(new TestEntity() { ID = i });
-                if (list.Any())
+                if (list.Count != 0)
                     InsertRangeAsync(list).GetAwaiter().GetResult();
             }
         }
@@ -45,7 +45,7 @@
             {
                 PageIndex = pageIndex,
                 PageSize = pageSize,
-                ViewModelList = new List<TestEntity>()
+                ViewModelList = []
             };
 
             var filter = Expressionable.Create<TestEntity>().ToExpression();

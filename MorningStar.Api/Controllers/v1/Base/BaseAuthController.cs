@@ -12,9 +12,9 @@
     public class BaseAuthController(
         Serilog.ILogger logger,
         IDistributedCache dCache,
-        IUserService userService) : BaseApiController
+        IUserService userService
+        ) : BaseApiController
     {
-
         /// <summary>
         /// 获取登录图片验证码
         /// </summary>

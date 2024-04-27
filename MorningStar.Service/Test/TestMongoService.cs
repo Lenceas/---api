@@ -24,11 +24,11 @@
         public void InitDatas()
         {
             var list = GetAllListAsync().GetAwaiter().GetResult();
-            if (!list.Any())
+            if (list.Count == 0)
             {
                 for (int i = 1; i < 25; i++)
                     list.Add(new TestMongoEntity() { ID = i });
-                if (list.Any())
+                if (list.Count != 0)
                     InsertRangeAsync(list).GetAwaiter().GetResult();
             }
         }

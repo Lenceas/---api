@@ -16,6 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MorningStar.IService\MorningStar.IService.csproj" />
     <ProjectReference Include="..\MorningStar.Repository\MorningStar.Repository.csproj" />
   </ItemGroup>
 

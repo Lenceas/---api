@@ -1,5 +1,4 @@
 ﻿using MongoDB.Driver;
-using MorningStar.Service;
 using SqlSugar;
 
 namespace MorningStar.Extension
@@ -43,7 +42,7 @@ namespace MorningStar.Extension
                 #region 测试表 TestEntity
                 log.Information($"开始初始化 {CommonHelper.GetClassDescription(typeof(TestEntity))} {nameof(TestEntity)} 数据...");
                 db.CodeFirst.SetStringDefaultLength(255).InitTables(typeof(TestEntity));
-                new TestService().InitDatas();
+                //new TestService().InitDatas();
                 log.Information($"{CommonHelper.GetClassDescription(typeof(TestEntity))} {nameof(TestEntity)} 数据初始化成功！");
                 #endregion
 
@@ -53,13 +52,13 @@ namespace MorningStar.Extension
 
                 #region 测试Mongo表 TestMongoEntity
                 log.Information($"开始初始化 {CommonHelper.GetClassDescription(typeof(TestMongoEntity))} {nameof(TestMongoEntity)} 数据...");
-                new TestMongoService().InitDatas();
+                //new TestMongoService().InitDatas();
                 log.Information($"{CommonHelper.GetClassDescription(typeof(TestMongoEntity))} {nameof(TestMongoEntity)} 数据初始化成功！");
                 #endregion
 
                 #region 用户表 UserEntity
                 log.Information($"开始初始化 {CommonHelper.GetClassDescription(typeof(UserEntity))} {nameof(UserEntity)} 数据...");
-                new UserService().InitDatas();
+                //new UserService().InitDatas();
                 log.Information($"{CommonHelper.GetClassDescription(typeof(UserEntity))} {nameof(UserEntity)} 数据初始化成功！");
                 #endregion
 

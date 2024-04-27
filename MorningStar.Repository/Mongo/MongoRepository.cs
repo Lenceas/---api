@@ -8,7 +8,7 @@ namespace MorningStar.Repository
     /// MongoDB 仓储实现类
     /// </summary>
     /// <typeparam name="T">泛型实体</typeparam>
-    public class MongoRepository<T> : IMongoRepository<T>
+    public class MongoRepository<T> : IMongoRepository<T> where T : class, new()
     {
         private readonly IMongoCollection<T> _collection;
 

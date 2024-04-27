@@ -3,28 +3,19 @@
     /// <summary>
     /// 测试数据接口
     /// </summary>
+    /// <remarks>
+    /// 构造函数
+    /// </remarks>
     [AllowAnonymous]
-    public class TestWebController : BaseApiController
+    public class TestWebController(
+        Serilog.ILogger logger, 
+        IMapper mapper, 
+        IMemoryCache mCache, 
+        IDistributedCache dCache, 
+        ITestService testService, 
+        ITestMongoService testMongoService
+        ) : BaseApiController
     {
-        private readonly Serilog.ILogger _logger;
-        private readonly IMapper _mapper;
-        private readonly IMemoryCache _mCache;
-        private readonly IDistributedCache _dCache;
-        private readonly ITestService _testService;
-        private readonly ITestMongoService _testMongoService;
-
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        public TestWebController(Serilog.ILogger logger, IMapper mapper, IMemoryCache mCache, IDistributedCache dCache, ITestService testService, ITestMongoService testMongoService)
-        {
-            _logger = logger;
-            _mapper = mapper;
-            _mCache = mCache;
-            _dCache = dCache;
-            _testService = testService;
-            _testMongoService = testMongoService;
-        }
 
         #region 公共
         /// <summary>
@@ -37,7 +28,7 @@
         {
             try
             {
-                return ApiResult(await _mCache.GetOrCreateAsync("MemoryCache", async entry =>
+                return ApiResult(await mCache.GetOrCreateAsync("MemoryCache", async entry =>
                 {
                     entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(2);
                     await Task.Delay(TimeSpan.FromSeconds(0));
@@ -46,7 +37,7 @@
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "TestWeb/GetMemoryCache");
+                logger.Error(ex, "TestWeb/GetMemoryCache");
                 return ApiErrorResult(ex.Message);
             }
         }
@@ -61,11 +52,11 @@
         {
             try
             {
-                var r = await _dCache.GetStringAsync("Redis");
+                var r = await dCache.GetStringAsync("Redis");
                 if (string.IsNullOrEmpty(r))
                 {
                     r = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    await _dCache.SetStringAsync("Redis", r
+                    await dCache.SetStringAsync("Redis", r
                         , new DistributedCacheEntryOptions()
                         {
                             // 设置缓存项的绝对过期时间相对于当前时间的间隔
@@ -80,7 +71,7 @@
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "TestWeb/GetRedisCache");
+                logger.Error(ex, "TestWeb/GetRedisCache");
                 return ApiErrorResult(ex.Message);
             }
         }
@@ -99,18 +90,18 @@
         {
             try
             {
-                var r = await _testService.GetPage(pageIndex, pageSize);
+                var r = await testService.GetPage(pageIndex, pageSize);
                 return ApiTResult(new PageViewModel<TestPageWebModel>()
                 {
                     PageIndex = r.PageIndex,
                     PageSize = r.PageSize,
                     TotalCount = r.TotalCount,
-                    ViewModelList = _mapper.Map<List<TestPageWebModel>>(r.ViewModelList)
+                    ViewModelList = mapper.Map<List<TestPageWebModel>>(r.ViewModelList)
                 });
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "TestWeb/GetPage");
+                logger.Error(ex, "TestWeb/GetPage");
                 return ApiErrorResult(ex.Message);
             }
         }
@@ -127,18 +118,18 @@
         {
             try
             {
-                var r = await _testMongoService.GetPage(pageIndex, pageSize);
+                var r = await testMongoService.GetPage(pageIndex, pageSize);
                 return ApiTResult(new PageViewModel<TestMongoPageWebModel>()
                 {
                     PageIndex = r.PageIndex,
                     PageSize = r.PageSize,
                     TotalCount = r.TotalCount,
-                    ViewModelList = _mapper.Map<List<TestMongoPageWebModel>>(r.ViewModelList)
+                    ViewModelList = mapper.Map<List<TestMongoPageWebModel>>(r.ViewModelList)
                 });
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "TestWeb/GetMongoPage");
+                logger.Error(ex, "TestWeb/GetMongoPage");
                 return ApiErrorResult(ex.Message);
             }
         }
@@ -154,11 +145,11 @@
         {
             try
             {
-                return ApiTResult(_mapper.Map<TestDetailWebModel>(await _testService.GetDetail(id)));
+                return ApiTResult(mapper.Map<TestDetailWebModel>(await testService.GetDetail(id)));
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "TestWeb/GetDetail");
+                logger.Error(ex, "TestWeb/GetDetail");
                 return ApiErrorResult(ex.Message);
             }
         }
@@ -174,11 +165,11 @@
         {
             try
             {
-                return ApiTResult(_mapper.Map<TestMongoDetailWebModel>(await _testMongoService.GetDetail(id)));
+                return ApiTResult(mapper.Map<TestMongoDetailWebModel>(await testMongoService.GetDetail(id)));
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "TestWeb/GetMongoDetail");
+                logger.Error(ex, "TestWeb/GetMongoDetail");
                 return ApiErrorResult(ex.Message);
             }
         }
@@ -194,12 +185,12 @@
         {
             try
             {
-                await _testService.SaveTest(model);
+                await testService.SaveTest(model);
                 return ApiResult(true);
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "TestWeb/SaveTest");
+                logger.Error(ex, "TestWeb/SaveTest");
                 return ApiErrorResult(ex.Message);
             }
         }
@@ -215,12 +206,12 @@
         {
             try
             {
-                await _testMongoService.SaveTest(model);
+                await testMongoService.SaveTest(model);
                 return ApiResult(true);
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "TestWeb/SaveMongoTest");
+                logger.Error(ex, "TestWeb/SaveMongoTest");
                 return ApiErrorResult(ex.Message);
             }
         }
@@ -236,12 +227,12 @@
         {
             try
             {
-                await _testService.DeleteTest(id);
+                await testService.DeleteTest(id);
                 return ApiResult(true);
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "TestWeb/DeleteTest");
+                logger.Error(ex, "TestWeb/DeleteTest");
                 return ApiErrorResult(ex.Message);
             }
         }
@@ -257,12 +248,12 @@
         {
             try
             {
-                await _testMongoService.DeleteTest(id);
+                await testMongoService.DeleteTest(id);
                 return ApiResult(true);
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "TestWeb/DeleteMongoTest");
+                logger.Error(ex, "TestWeb/DeleteMongoTest");
                 return ApiErrorResult(ex.Message);
             }
         }
