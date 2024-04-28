@@ -5,14 +5,14 @@ namespace MorningStar.Service
     /// <summary>
     /// 用户实现类
     /// </summary>
-    public class UserService : MongoRepository<UserEntity>, IUserService
+    public class UserService : MongoRepository<UserMongoEntity>, IUserService
     {
         private readonly IDistributedCache _cache;
 
         /// <summary>
         /// 构造函数
         /// </summary>
-        public UserService() : base(nameof(UserEntity))
+        public UserService() : base(nameof(UserMongoEntity))
         {
             _cache = App.GetService<IDistributedCache>();
         }
@@ -29,7 +29,7 @@ namespace MorningStar.Service
         {
             var en = GetSingleAsync(_ => _.ID == 1024).GetAwaiter().GetResult();
             if (en == null)
-                InsertAsync(new UserEntity() { ID = 1024, UserName = "Lenceas", Account = "admin", Password = CommonHelper.MD5Encrytp("admin888") }).GetAwaiter().GetResult();
+                InsertAsync(new UserMongoEntity() { ID = 1024, UserName = "Lenceas", Account = "admin", Password = CommonHelper.MD5Encrytp("admin888") }).GetAwaiter().GetResult();
         }
 
         /// <summary>

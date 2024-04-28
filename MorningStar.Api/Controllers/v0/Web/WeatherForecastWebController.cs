@@ -3,20 +3,13 @@
     /// <summary>
     /// 天气预报接口
     /// </summary>
-    [CustomRoute(ApiVersions.v2)]
+    /// <param name="logger"></param>
+    [CustomRoute(ApiVersions.v0)]
     [AllowAnonymous]
-    public class WeatherForecastWebController : BaseApiController
+    public class WeatherForecastWebController(
+        Serilog.ILogger logger
+        ) : BaseApiController
     {
-        private readonly Serilog.ILogger _logger;
-
-        /// <summary>
-        /// 构造函数
-        /// </summary>
-        public WeatherForecastWebController(Serilog.ILogger logger)
-        {
-            _logger = logger;
-        }
-
         /// <summary>
         /// 获取天气预报数据
         /// </summary>
@@ -27,10 +20,10 @@
         {
             try
             {
-                string[] Summaries = new[]
-                {
+                string[] Summaries =
+                [
                     "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-                };
+                ];
                 return ApiTResult(Enumerable.Range(1, 5).Select(index => new WeatherForecast
                 {
                     Date = DateTime.Now.AddDays(index),
@@ -40,7 +33,7 @@
             }
             catch (Exception ex)
             {
-                _logger.Error(ex, "WeatherForecastWeb/Get");
+                logger.Error(ex, "WeatherForecastWeb/Get");
                 return ApiErrorResult(ex.Message);
             }
         }

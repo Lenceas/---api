@@ -3,7 +3,7 @@
     /// <summary>
     /// 测试数据分页WebModel
     /// </summary>
-    public class TestPageWebModel : BaseDTOModel
+    public class TestMySqlPageWebModel : BaseDTOModel
     {
 
     }

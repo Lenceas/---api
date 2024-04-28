@@ -2,13 +2,11 @@
 {
     /// <summary>
     /// 基础权限接口
-    /// </summary>    
-    /// <remarks>
-    /// 构造函数
-    /// </remarks>
+    /// </summary>
     /// <param name="logger"></param>
     /// <param name="dCache"></param>
     /// <param name="userService"></param>
+    [CustomRoute(ApiVersions.v1)]
     public class BaseAuthController(
         Serilog.ILogger logger,
         IDistributedCache dCache,

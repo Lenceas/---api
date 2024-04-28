@@ -19,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MorningStar.IService\MorningStar.IService.csproj" />
+    <ProjectReference Include="..\MorningStar.Service\MorningStar.Service.csproj" />
   </ItemGroup>
 
 </Project>

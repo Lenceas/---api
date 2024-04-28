@@ -21,7 +21,7 @@ namespace MorningStar.Repository
         {
             db ??= App.GetService<IMongoDatabase>();
             // 自动截取表名，保留前面的部分
-            _collection = db.GetCollection<T>(collectionName.Replace("Entity", ""));
+            _collection = db.GetCollection<T>(collectionName.Replace("MongoEntity", ""));
         }
 
         /// <summary>

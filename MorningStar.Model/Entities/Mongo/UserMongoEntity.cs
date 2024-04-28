@@ -4,7 +4,7 @@
     /// 用户表
     /// </summary>
     [Description("用户表")]
-    public class UserEntity : BaseMongoEntity
+    public class UserMongoEntity : BaseMongoEntity
     {
         /// <summary>
         /// 用户名称

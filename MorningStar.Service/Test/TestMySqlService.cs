@@ -3,12 +3,12 @@
     /// <summary>
     /// 测试实现类
     /// </summary>
-    public class TestService : SqlSugarRepository<TestEntity>, ITestService
+    public class TestMySqlService : SqlSugarRepository<TestMySqlEntity>, ITestMySqlService
     {
         /// <summary>
         /// 构造函数
         /// </summary>
-        public TestService()
+        public TestMySqlService()
         {
 
         }
@@ -27,7 +27,7 @@
             if (list.Count == 0)
             {
                 for (int i = 1; i < 25; i++)
-                    list.Add(new TestEntity() { ID = i });
+                    list.Add(new TestMySqlEntity() { ID = i });
                 if (list.Count != 0)
                     InsertRangeAsync(list).GetAwaiter().GetResult();
             }
@@ -39,16 +39,16 @@
         /// <param name="pageIndex">当前页</param>
         /// <param name="pageSize">页大小</param>
         /// <returns></returns>
-        public async Task<PageViewModel<TestEntity>> GetPage(int pageIndex, int pageSize)
+        public async Task<PageViewModel<TestMySqlEntity>> GetPage(int pageIndex, int pageSize)
         {
-            var result = new PageViewModel<TestEntity>()
+            var result = new PageViewModel<TestMySqlEntity>()
             {
                 PageIndex = pageIndex,
                 PageSize = pageSize,
                 ViewModelList = []
             };
 
-            var filter = Expressionable.Create<TestEntity>().ToExpression();
+            var filter = Expressionable.Create<TestMySqlEntity>().ToExpression();
             RefAsync<int> count = 0;
             var list = await AsQueryable()
                                     .OrderByDescending(_ => _.MTime)
@@ -66,7 +66,7 @@
         /// </summary>
         /// <param name="id">测试数据ID</param>
         /// <returns></returns>
-        public async Task<TestEntity> GetDetail(long id)
+        public async Task<TestMySqlEntity> GetDetail(long id)
         {
             return await GetByIdAsync(id) ?? throw new Exception("无效的测试数据ID！");
         }
@@ -76,13 +76,18 @@
         /// </summary>
         /// <param name="model">保存测试数据WebModel</param>
         /// <returns></returns>
-        public async Task SaveTest(SaveTestWebModel model)
+        public async Task SaveTest(SaveTestMySqlWebModel model)
         {
             if (model.ID == 0)// 新增
             {
                 var list = await GetListAsync();
-                var maxID = list?.Max(_ => _.ID) ?? 0;
-                await InsertAsync(new TestEntity() { ID = maxID + 1 });
+                if (list.Count == 0)
+                    await InsertAsync(new TestMySqlEntity() { ID = 1 });
+                else
+                {
+                    var maxID = list?.Max(_ => _.ID) ?? 0;
+                    await InsertAsync(new TestMySqlEntity() { ID = maxID + 1 });
+                }
             }
             else// 编辑
             {

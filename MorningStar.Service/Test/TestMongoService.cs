@@ -65,8 +65,13 @@
             if (model.ID == 0)// 新增
             {
                 var list = await GetAllListAsync();
-                var maxID = list?.Max(_ => _.ID) ?? 0;
-                await InsertAsync(new TestMongoEntity() { ID = maxID + 1 });
+                if (list.Count == 0)
+                    await InsertAsync(new TestMongoEntity() { ID = 1 });
+                else
+                {
+                    var maxID = list?.Max(_ => _.ID) ?? 0;
+                    await InsertAsync(new TestMongoEntity() { ID = maxID + 1 });
+                }
             }
             else// 编辑
             {
