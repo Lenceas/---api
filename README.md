@@ -1,5 +1,5 @@
 # 晨星博客 - api
-[![sdk](https://img.shields.io/badge/sdk-6.0.21-d.svg)](#)  
+[![sdk](https://img.shields.io/badge/sdk-8.0.4-d.svg)](#)  
 -------------------------------
 `MorningStar.Api`：表现层  
 `MorningStar.Service`：服务层  

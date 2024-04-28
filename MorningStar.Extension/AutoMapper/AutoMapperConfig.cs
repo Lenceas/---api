@@ -10,10 +10,8 @@
         /// </summary>
         public AutoMapperConfig()
         {
-            #region TestEntity
-
-            #region TestEntity >> TestPageWebModel
-            CreateMap<TestEntity, TestPageWebModel>()
+            #region BaseEntity >> BaseDTOModel
+            CreateMap<BaseEntity, BaseDTOModel>()
                 .ForMember(_ => _.ReportDate,
                 _ => _.MapFrom(
                     src => src.ReportDate.ToLocalTime().ToString("yyyy-MM-dd")))
@@ -21,45 +19,6 @@
                     src => src.MTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")))
                 .ForMember(_ => _.CTime, _ => _.MapFrom(
                     src => src.CTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")));
-            #endregion
-
-            #region TestEntity >> TestDetailWebModel
-            CreateMap<TestEntity, TestDetailWebModel>()
-                .ForMember(_ => _.ReportDate,
-                _ => _.MapFrom(
-                    src => src.ReportDate.ToLocalTime().ToString("yyyy-MM-dd")))
-                .ForMember(_ => _.MTime, _ => _.MapFrom(
-                    src => src.MTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")))
-                .ForMember(_ => _.CTime, _ => _.MapFrom(
-                    src => src.CTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")));
-            #endregion
-
-            #endregion
-
-            #region TestMongoEntity
-
-            #region TestMongoEntity >> TestMongoPageWebModel
-            CreateMap<TestMongoEntity, TestMongoPageWebModel>()
-                .ForMember(_ => _.ReportDate,
-                _ => _.MapFrom(
-                    src => src.ReportDate.ToLocalTime().ToString("yyyy-MM-dd")))
-                .ForMember(_ => _.MTime, _ => _.MapFrom(
-                    src => src.MTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")))
-                .ForMember(_ => _.CTime, _ => _.MapFrom(
-                    src => src.CTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")));
-            #endregion
-
-            #region TestMongoEntity >> TestMongoDetailWebModel
-            CreateMap<TestMongoEntity, TestMongoDetailWebModel>()
-                .ForMember(_ => _.ReportDate,
-                _ => _.MapFrom(
-                    src => src.ReportDate.ToLocalTime().ToString("yyyy-MM-dd")))
-                .ForMember(_ => _.MTime, _ => _.MapFrom(
-                    src => src.MTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")))
-                .ForMember(_ => _.CTime, _ => _.MapFrom(
-                    src => src.CTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")));
-            #endregion
-
             #endregion
         }
     }
