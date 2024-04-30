@@ -31,7 +31,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Controllers\v0\Base\" />
 	  <Folder Include="wwwroot\Logs\" />
 	  <Folder Include="wwwroot\Fonts\" />
 	</ItemGroup>

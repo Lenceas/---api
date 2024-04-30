@@ -27,7 +27,7 @@ namespace MorningStar.Extension
                         Contact = new OpenApiContact
                         {
                             Name = "Lenceas",
-                            Url = new Uri("http://lujiesheng.cn/")
+                            Url = new Uri("https://lujiesheng.cn/")
                         }
                     });
                     c.OrderActionsBy(o => o.RelativePath);

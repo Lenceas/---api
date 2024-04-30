@@ -13,16 +13,16 @@ namespace MorningStar.Extension
         public enum ApiVersions
         {
             /// <summary>
-            /// v0
-            /// </summary>
-            [Description("v0")]
-            v0 = 0,
-
-            /// <summary>
             /// v1
             /// </summary>
             [Description("v1")]
             v1 = 1,
+
+            /// <summary>
+            /// v2
+            /// </summary>
+            [Description("v2")]
+            v2 = 2,
         }
     }
 }
