@@ -38,6 +38,7 @@
         /// <summary>
         /// 具体过期时间
         /// </summary>
-        public DateTime ExpiredMinuteTimeStr { get { return DateTime.Now.AddMinutes(ExpiredMinuteTime); } }
+        public DateTime ExpiredMinuteTimeStr
+        { get { return DateTime.Now.AddMinutes(ExpiredMinuteTime); } }
     }
 }

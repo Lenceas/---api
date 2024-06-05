@@ -20,8 +20,8 @@
         ITestMongoService testMongoService
         ) : BaseApiController
     {
-
         #region 缓存
+
         /// <summary>
         /// 获取Memory缓存数据（过期时间：2s）
         /// </summary>
@@ -81,9 +81,11 @@
                 return ApiErrorResult(ex.Message);
             }
         }
-        #endregion
+
+        #endregion 缓存
 
         #region MySql
+
         /// <summary>
         /// 获取测试MySql数据分页
         /// </summary>
@@ -177,9 +179,11 @@
                 return ApiErrorResult(ex.Message);
             }
         }
-        #endregion
+
+        #endregion MySql
 
         #region Mongo
+
         /// <summary>
         /// 获取测试Mongo数据分页
         /// </summary>
@@ -273,6 +277,7 @@
                 return ApiErrorResult(ex.Message);
             }
         }
-        #endregion
+
+        #endregion Mongo
     }
 }

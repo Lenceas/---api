@@ -15,6 +15,7 @@
             #region TestMySqlEntity
 
             #region TestMySqlEntity >> TestMySqlPageWebModel
+
             CreateMap<TestMySqlEntity, TestMySqlPageWebModel>()
                 .ForMember(_ => _.ReportDate,
                 _ => _.MapFrom(
@@ -23,9 +24,11 @@
                     src => src.MTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")))
                 .ForMember(_ => _.CTime, _ => _.MapFrom(
                     src => src.CTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")));
-            #endregion
+
+            #endregion TestMySqlEntity >> TestMySqlPageWebModel
 
             #region TestMySqlEntity >> TestMySqlDetailWebModel
+
             CreateMap<TestMySqlEntity, TestMySqlDetailWebModel>()
                 .ForMember(_ => _.ReportDate,
                 _ => _.MapFrom(
@@ -34,17 +37,19 @@
                     src => src.MTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")))
                 .ForMember(_ => _.CTime, _ => _.MapFrom(
                     src => src.CTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")));
-            #endregion
 
-            #endregion
+            #endregion TestMySqlEntity >> TestMySqlDetailWebModel
 
-            #endregion
+            #endregion TestMySqlEntity
+
+            #endregion MySql
 
             #region Mongo
 
             #region TestMongoEntity
 
             #region TestMongoEntity >> TestMongoPageWebModel
+
             CreateMap<TestMongoEntity, TestMongoPageWebModel>()
                 .ForMember(_ => _.ReportDate,
                 _ => _.MapFrom(
@@ -53,9 +58,11 @@
                     src => src.MTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")))
                 .ForMember(_ => _.CTime, _ => _.MapFrom(
                     src => src.CTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")));
-            #endregion
+
+            #endregion TestMongoEntity >> TestMongoPageWebModel
 
             #region TestMongoEntity >> TestMongoDetailWebModel
+
             CreateMap<TestMongoEntity, TestMongoDetailWebModel>()
                 .ForMember(_ => _.ReportDate,
                 _ => _.MapFrom(
@@ -64,11 +71,12 @@
                     src => src.MTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")))
                 .ForMember(_ => _.CTime, _ => _.MapFrom(
                     src => src.CTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")));
-            #endregion
 
-            #endregion
+            #endregion TestMongoEntity >> TestMongoDetailWebModel
 
-            #endregion
+            #endregion TestMongoEntity
+
+            #endregion Mongo
         }
     }
 }

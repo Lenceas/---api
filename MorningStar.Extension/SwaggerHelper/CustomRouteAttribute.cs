@@ -22,6 +22,7 @@ namespace MorningStar.Extension
         public CustomRouteAttribute(string actionName = "[action]") : base("/api/{version}/[controller]/" + actionName)
         {
         }
+
         /// <summary>
         /// 自定义版本+路由构造函数，继承基类路由
         /// </summary>

@@ -41,29 +41,35 @@ namespace MorningStar.Extension
                 #region mysql
 
                 #region 测试MySql表 TestMySqlEntity
+
                 log.Information($"开始初始化 {CommonHelper.GetClassDescription(typeof(TestMySqlEntity))} {nameof(TestMySqlEntity)} 数据...");
                 db.CodeFirst.SetStringDefaultLength(255).InitTables(typeof(TestMySqlEntity));
                 new TestMySqlService().InitDatas();
                 log.Information($"{CommonHelper.GetClassDescription(typeof(TestMySqlEntity))} {nameof(TestMySqlEntity)} 数据初始化成功！");
-                #endregion
 
-                #endregion
+                #endregion 测试MySql表 TestMySqlEntity
+
+                #endregion mysql
 
                 #region mongo
 
                 #region 测试Mongo表 TestMongoEntity
+
                 log.Information($"开始初始化 {CommonHelper.GetClassDescription(typeof(TestMongoEntity))} {nameof(TestMongoEntity)} 数据...");
                 new TestMongoService().InitDatas();
                 log.Information($"{CommonHelper.GetClassDescription(typeof(TestMongoEntity))} {nameof(TestMongoEntity)} 数据初始化成功！");
-                #endregion
+
+                #endregion 测试Mongo表 TestMongoEntity
 
                 #region 用户表 UserMongoEntity
+
                 log.Information($"开始初始化 {CommonHelper.GetClassDescription(typeof(UserMongoEntity))} {nameof(UserMongoEntity)} 数据...");
                 new UserService().InitDatas();
                 log.Information($"{CommonHelper.GetClassDescription(typeof(UserMongoEntity))} {nameof(UserMongoEntity)} 数据初始化成功！");
-                #endregion
 
-                #endregion
+                #endregion 用户表 UserMongoEntity
+
+                #endregion mongo
 
                 Console.WriteLine();
                 log.Information("表数据初始化完成！");
@@ -75,7 +81,6 @@ namespace MorningStar.Extension
             {
                 throw new Exception("CodeFirst：数据生成错误：" + ex.Message);
             }
-
         }
     }
 }

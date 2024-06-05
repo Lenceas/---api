@@ -5,11 +5,8 @@
     /// </summary>
     public interface ITestMySqlService
     {
-        #region 公共
-
-        #endregion
-
         #region 业务
+
         /// <summary>
         /// 初始化测试数据
         /// </summary>
@@ -43,6 +40,7 @@
         /// <param name="id">测试数据ID</param>
         /// <returns></returns>
         Task DeleteTest(long id);
-        #endregion
+
+        #endregion 业务
     }
 }

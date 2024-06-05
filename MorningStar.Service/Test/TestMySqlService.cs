@@ -10,14 +10,12 @@
         /// </summary>
         public TestMySqlService()
         {
-
         }
 
-        #region 公共
 
-        #endregion
 
         #region 业务
+
         /// <summary>
         /// 初始化测试数据
         /// </summary>
@@ -106,6 +104,7 @@
             var en = await GetByIdAsync(id) ?? throw new Exception("无效的测试数据ID！");
             await DeleteAsync(en);
         }
-        #endregion
+
+        #endregion 业务
     }
 }

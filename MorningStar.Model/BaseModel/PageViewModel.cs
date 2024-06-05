@@ -19,7 +19,8 @@
         /// <summary>
         /// 总页数
         /// </summary>
-        public int PageCount { get { return TotalCount % PageSize == 0 ? TotalCount / PageSize : TotalCount / PageSize + 1; } }
+        public int PageCount
+        { get { return TotalCount % PageSize == 0 ? TotalCount / PageSize : TotalCount / PageSize + 1; } }
 
         /// <summary>
         /// 数据总数

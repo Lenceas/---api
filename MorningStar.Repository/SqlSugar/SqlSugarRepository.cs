@@ -14,6 +14,7 @@
                 base.Context = App.GetService<ISqlSugarClient>();
 
                 #region 手动重新 new 一个实例
+
                 //var connectionString = AppSettings.Get("DataBase:Mysql");
                 //if ((Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development").Equals("Production"))
                 //    connectionString = (Environment.GetEnvironmentVariable("DATABASE_MYSQL") ?? string.Empty).Replace("\"", "");
@@ -36,7 +37,7 @@
                 //        },
                 //        EntityService = (c, p) =>
                 //        {
-                //            // 建表技巧：自动Nullable 
+                //            // 建表技巧：自动Nullable
                 //            if (p.IsPrimarykey == false && new NullabilityInfoContext().Create(c).WriteState is NullabilityState.Nullable)
                 //            {
                 //                p.IsNullable = true;
@@ -50,7 +51,7 @@
                 //    }
                 //};
 
-                //// Scope模式：SqlSugarClient  
+                //// Scope模式：SqlSugarClient
                 //base.Context = new SqlSugarClient(configConnection,
                 //    db =>
                 //    {
@@ -61,7 +62,8 @@
                 //            // Console.WriteLine(sql);
                 //        };
                 //    });
-                #endregion
+
+                #endregion 手动重新 new 一个实例
             }
             else
                 base.Context = context;

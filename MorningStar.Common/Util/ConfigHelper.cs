@@ -1,12 +1,9 @@
 ﻿namespace MorningStar.Common
 {
-    public static  class ConfigHelper
+    public static class ConfigHelper
     {
-        #region 基础配置
-
-        #endregion
-
         #region 用户权限配置
+
         /// <summary>
         /// 登录RedisKey
         /// </summary>
@@ -28,6 +25,7 @@
                 return AppSettings.Get("Redis:CaptchaName");
             }
         }
-        #endregion
+
+        #endregion 用户权限配置
     }
 }

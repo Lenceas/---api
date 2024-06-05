@@ -17,11 +17,10 @@ namespace MorningStar.Service
             _cache = App.GetService<IDistributedCache>();
         }
 
-        #region 公共
 
-        #endregion
 
         #region 业务
+
         /// <summary>
         /// 初始化用户数据
         /// </summary>
@@ -76,6 +75,7 @@ namespace MorningStar.Service
             }
             else throw new Exception("验证码错误或已过期，请点击验证码刷新并重新登录！");
         }
-        #endregion
+
+        #endregion 业务
     }
 }

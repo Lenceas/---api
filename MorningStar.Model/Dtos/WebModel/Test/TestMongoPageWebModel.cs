@@ -3,8 +3,7 @@
     /// <summary>
     /// 测试Mongo数据分页WebModel
     /// </summary>
-    public class TestMongoPageWebModel: TestMySqlPageWebModel
+    public class TestMongoPageWebModel : TestMySqlPageWebModel
     {
-
     }
 }

@@ -19,5 +19,4 @@ namespace MorningStar.Extension
             // 在此方法中，你可以在操作方法执行后执行任何需要的操作
         }
     }
-
 }

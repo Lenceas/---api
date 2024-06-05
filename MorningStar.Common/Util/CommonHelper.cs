@@ -40,6 +40,5 @@ namespace MorningStar.Common
             }
             return sb.ToString();
         }
-
     }
 }

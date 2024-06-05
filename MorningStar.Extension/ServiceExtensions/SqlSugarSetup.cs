@@ -36,7 +36,7 @@ namespace MorningStar.Extension
                     },
                     EntityService = (c, p) =>
                     {
-                        // 建表技巧：自动Nullable 
+                        // 建表技巧：自动Nullable
                         if (p.IsPrimarykey == false && new NullabilityInfoContext().Create(c).WriteState is NullabilityState.Nullable)
                         {
                             p.IsNullable = true;
@@ -50,7 +50,7 @@ namespace MorningStar.Extension
                 }
             };
 
-            // Scope模式：SqlSugarClient  
+            // Scope模式：SqlSugarClient
             var sqlSugar = new SqlSugarClient(configConnection,
                 db =>
                 {

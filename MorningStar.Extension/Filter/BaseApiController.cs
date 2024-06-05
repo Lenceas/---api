@@ -41,7 +41,7 @@ namespace MorningStar.Extension
         protected static IActionResult ApiErrorResult(string errorMessage, int errorCode = 400)
         {
             return new OkObjectResult(new ApiResult(errorMessage, errorCode));
-        }        
+        }
 
         /// <summary>
         /// 返回一个失败的 API 结果

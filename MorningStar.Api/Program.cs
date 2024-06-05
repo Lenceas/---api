@@ -6,6 +6,7 @@ using MorningStar.Repository;
 var builder = WebApplication.CreateBuilder(args);
 
 #region 将服务添加到容器中
+
 // 注册 Serilog 服务
 builder.Services.AddSerilogSetup(builder.Environment, out Serilog.ILogger log);
 Console.WriteLine();
@@ -99,11 +100,13 @@ builder.Services.AddEndpointsApiExplorer();
 Console.WriteLine();
 log.Information("************ 容器服务注册完毕 ************");
 Console.WriteLine();
-#endregion
+
+#endregion 将服务添加到容器中
 
 var app = builder.Build();
 
 #region 配置HTTP请求管道
+
 log.Information("************ 开始启用中间件 **************");
 Console.WriteLine();
 
@@ -158,4 +161,5 @@ log.Information("************ 中间件启用完毕 **************");
 Console.WriteLine();
 
 app.Run();
-#endregion
+
+#endregion 配置HTTP请求管道

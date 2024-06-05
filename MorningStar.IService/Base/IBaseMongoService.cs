@@ -2,6 +2,5 @@
 {
     public interface IBaseMongoService<T> where T : class
     {
-
     }
 }

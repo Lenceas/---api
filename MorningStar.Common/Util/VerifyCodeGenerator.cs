@@ -13,6 +13,7 @@ namespace MorningStar.Common
     {
         private static readonly Color[] Colors = [ Color.Black, Color.Red, Color.Blue, Color.Green, Color.Orange, Color.Brown,
         Color.Brown,Color.DarkBlue];
+
         private static readonly char[] Chars = [ '2','3','4','5','6','8','9',
        'A','B','C','D','E','F','G','H','J','K', 'L','M','N','P','R','S','T','W','X','Y' ];
 

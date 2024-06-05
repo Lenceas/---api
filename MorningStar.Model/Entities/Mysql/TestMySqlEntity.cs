@@ -7,6 +7,5 @@
         SugarTable("Test", TableDescription = "测试表", IsCreateTableFiledSort = true)]
     public class TestMySqlEntity : BaseEntity
     {
-
     }
 }

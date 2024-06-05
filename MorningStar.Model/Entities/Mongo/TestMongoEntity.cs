@@ -6,6 +6,5 @@
     [Description("测试Mongo表")]
     public class TestMongoEntity : BaseMongoEntity
     {
-
     }
 }
