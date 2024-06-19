@@ -16,11 +16,10 @@ namespace MorningStar.Extension
             // 注册 IMongoClient 单例
             services.AddSingleton<IMongoClient>(provider =>
             {
-                var connectionString = AppSettings.Get("DataBase:Mongo:ConnectionString");
+                var connectionString = ConfigHelper.MongoConnectionString;
                 if ((Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development").Equals("Production"))
                     connectionString = (Environment.GetEnvironmentVariable("DATABASE_MONGO") ?? string.Empty).Replace("\"", "");
                 if (string.IsNullOrEmpty(connectionString)) throw new Exception("容器服务：【MongoDB】注册错误：connectionString为空！");
-                //Console.WriteLine(connectionString);
                 return new MongoClient(connectionString);
             });
 
@@ -28,7 +27,7 @@ namespace MorningStar.Extension
             services.AddScoped(provider =>
             {
                 var client = provider.GetRequiredService<IMongoClient>();
-                return client.GetDatabase(AppSettings.Get("DataBase:Mongo:DatabaseName"));
+                return client.GetDatabase(ConfigHelper.MongoDatabaseName);
             });
         }
     }
