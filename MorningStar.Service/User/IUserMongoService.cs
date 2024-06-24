@@ -1,9 +1,9 @@
-﻿namespace MorningStar.IService
+﻿namespace MorningStar.Service
 {
     /// <summary>
     /// 用户接口类
     /// </summary>
-    public interface IUserService
+    public interface IUserMongoService
     {
         #region 业务
 

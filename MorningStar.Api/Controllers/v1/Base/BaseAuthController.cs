@@ -10,7 +10,7 @@
     public class BaseAuthController(
         Serilog.ILogger logger,
         IDistributedCache dCache,
-        IUserService userService
+        IUserMongoService userService
         ) : BaseApiController
     {
         /// <summary>

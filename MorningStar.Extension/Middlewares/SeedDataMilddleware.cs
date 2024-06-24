@@ -64,7 +64,7 @@ namespace MorningStar.Extension
                 #region 用户表 UserMongoEntity
 
                 log.Information($"开始初始化 {CommonHelper.GetClassDescription(typeof(UserMongoEntity))} {nameof(UserMongoEntity)} 数据...");
-                new UserService().InitDatas();
+                new UserMongoService().InitDatas();
                 log.Information($"{CommonHelper.GetClassDescription(typeof(UserMongoEntity))} {nameof(UserMongoEntity)} 数据初始化成功！");
 
                 #endregion 用户表 UserMongoEntity

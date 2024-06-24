@@ -3,7 +3,7 @@
     /// <summary>
     /// 测试数据接口
     /// </summary>
-    /// <param name="logger"></param>
+    /// <param name="log"></param>
     /// <param name="mapper"></param>
     /// <param name="mCache"></param>
     /// <param name="dCache"></param>
@@ -12,7 +12,7 @@
     [CustomRoute(ApiVersions.v1)]
     [AllowAnonymous]
     public class TestWebController(
-        Serilog.ILogger logger,
+        Serilog.ILogger log,
         IMapper mapper,
         IMemoryCache mCache,
         IDistributedCache dCache,
@@ -41,7 +41,7 @@
             }
             catch (Exception ex)
             {
-                logger.Error(ex,
+                log.Error(ex,
                     $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(GetMemoryCache)}");
                 return ApiErrorResult(ex.Message);
             }
@@ -76,7 +76,7 @@
             }
             catch (Exception ex)
             {
-                logger.Error(ex,
+                log.Error(ex,
                     $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(GetRedisCache)}");
                 return ApiErrorResult(ex.Message);
             }
@@ -109,7 +109,7 @@
             }
             catch (Exception ex)
             {
-                logger.Error(ex,
+                log.Error(ex,
                     $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(GetMySqlPage)}");
                 return ApiErrorResult(ex.Message);
             }
@@ -130,7 +130,7 @@
             }
             catch (Exception ex)
             {
-                logger.Error(ex,
+                log.Error(ex,
                     $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(GetMySqlDetail)}");
                 return ApiErrorResult(ex.Message);
             }
@@ -152,7 +152,7 @@
             }
             catch (Exception ex)
             {
-                logger.Error(ex,
+                log.Error(ex,
                     $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(SaveMySqlTest)}");
                 return ApiErrorResult(ex.Message);
             }
@@ -174,7 +174,7 @@
             }
             catch (Exception ex)
             {
-                logger.Error(ex,
+                log.Error(ex,
                     $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(DeleteMySqlTest)}");
                 return ApiErrorResult(ex.Message);
             }
@@ -207,7 +207,7 @@
             }
             catch (Exception ex)
             {
-                logger.Error(ex,
+                log.Error(ex,
                     $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(GetMongoPage)}");
                 return ApiErrorResult(ex.Message);
             }
@@ -228,7 +228,7 @@
             }
             catch (Exception ex)
             {
-                logger.Error(ex,
+                log.Error(ex,
                     $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(GetMongoDetail)}");
                 return ApiErrorResult(ex.Message);
             }
@@ -250,7 +250,7 @@
             }
             catch (Exception ex)
             {
-                logger.Error(ex,
+                log.Error(ex,
                     $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(SaveMongoTest)}");
                 return ApiErrorResult(ex.Message);
             }
@@ -272,7 +272,7 @@
             }
             catch (Exception ex)
             {
-                logger.Error(ex,
+                log.Error(ex,
                     $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(DeleteMongoTest)}");
                 return ApiErrorResult(ex.Message);
             }

@@ -1,23 +1,19 @@
-﻿using Microsoft.Extensions.Caching.Distributed;
-
-namespace MorningStar.Service
+﻿namespace MorningStar.Service
 {
     /// <summary>
     /// 用户实现类
     /// </summary>
-    public class UserService : MongoRepository<UserMongoEntity>, IUserService
+    public class UserMongoService : MongoRepository<UserMongoEntity>, IUserMongoService
     {
         private readonly IDistributedCache _cache;
 
         /// <summary>
         /// 构造函数
         /// </summary>
-        public UserService() : base(nameof(UserMongoEntity))
+        public UserMongoService() : base(nameof(UserMongoEntity))
         {
             _cache = App.GetService<IDistributedCache>();
         }
-
-
 
         #region 业务
 

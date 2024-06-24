@@ -29,7 +29,7 @@ namespace MorningStar
         {
             try
             {
-                if (sections.Any())
+                if (sections.Length != 0)
                 {
                     return Configuration?[string.Join(":", sections)] ?? string.Empty;
                 }
@@ -48,7 +48,7 @@ namespace MorningStar
         /// <returns></returns>
         public static List<T> Get<T>(params string[] sections)
         {
-            List<T> list = new();
+            List<T> list = [];
             Configuration?.Bind(string.Join(":", sections), list);
             return list;
         }

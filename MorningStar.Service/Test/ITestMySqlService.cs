@@ -1,4 +1,4 @@
-﻿namespace MorningStar.IService
+﻿namespace MorningStar.Service
 {
     /// <summary>
     /// 测试接口类

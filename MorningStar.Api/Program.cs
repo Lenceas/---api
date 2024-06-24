@@ -7,9 +7,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 #region 将服务添加到容器中
 
+// 注册 AppSettings 服务
+builder.Services.AddSingleton(new AppSettings());
+
 // 注册 Serilog 服务
 builder.Services.AddSerilogSetup(builder.Environment, out Serilog.ILogger log);
-Console.WriteLine();
 log.Information("************ 开始注册容器服务 ************");
 Console.WriteLine();
 log.Information("容器服务：【Serilog】已注册！");
@@ -17,10 +19,6 @@ log.Information("容器服务：【Serilog】已注册！");
 // 注册 HttpContext 服务
 builder.Services.AddHttpContextAccessor();
 log.Information("容器服务：【HttpContext】已注册！");
-
-// 注册 AppSettings 服务
-builder.Services.AddSingleton(new AppSettings());
-log.Information("容器服务：【AppSettings】已注册！");
 
 // 注册 MiniProfiler 服务
 builder.Services.AddMiniProfilerSetup(builder);

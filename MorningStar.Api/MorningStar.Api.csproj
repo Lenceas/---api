@@ -37,7 +37,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\MorningStar.Extension\MorningStar.Extension.csproj" />
-	  <ProjectReference Include="..\MorningStar.Service\MorningStar.Service.csproj" />
 	</ItemGroup>
 
 </Project>
