@@ -44,7 +44,7 @@
         /// <summary>
         /// 修改时间(UTC)
         /// </summary>
-        [SugarColumn(InsertServerTime = true, UpdateServerTime = true, ColumnDescription = "修改时间(UTC)", CreateTableFieldSort = 96)]
+        [SugarColumn(InsertSql = "UTC_TIMESTAMP()", UpdateSql = "UTC_TIMESTAMP()", ColumnDescription = "修改时间(UTC)", CreateTableFieldSort = 96)]
         public DateTime MTime { get; set; } = DateTime.UtcNow;
 
         /// <summary>
@@ -62,7 +62,7 @@
         /// <summary>
         /// 创建时间(UTC)
         /// </summary>
-        [SugarColumn(InsertServerTime = true, ColumnDescription = "创建时间(UTC)", CreateTableFieldSort = 99)]
+        [SugarColumn(InsertSql = "UTC_TIMESTAMP()", ColumnDescription = "创建时间(UTC)", CreateTableFieldSort = 99)]
         public DateTime CTime { get; set; } = DateTime.UtcNow;
     }
 }

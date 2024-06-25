@@ -119,6 +119,7 @@ namespace MorningStar.Repository
         /// <returns></returns>
         public async Task UpdateAsync(long id, T entity)
         {
+            UpdateMTime(entity);
             await _collection.ReplaceOneAsync(Builders<T>.Filter.Eq("_id", id), entity);
         }
 
@@ -133,10 +134,11 @@ namespace MorningStar.Repository
             var bulkWrites = new List<WriteModel<T>>();
             foreach (var entity in entities)
             {
+                UpdateMTime(entity);
                 var filter = Builders<T>.Filter.Eq("_id", idSelector(entity));
                 bulkWrites.Add(new ReplaceOneModel<T>(filter, entity));
             }
-            if (bulkWrites.Any())
+            if (bulkWrites.Count != 0)
                 await _collection.BulkWriteAsync(bulkWrites);
         }
 
@@ -163,12 +165,23 @@ namespace MorningStar.Repository
                 var filter = Builders<T>.Filter.Eq("_id", id);
                 bulkWrites.Add(new DeleteOneModel<T>(filter));
             }
-            if (bulkWrites.Any())
+            if (bulkWrites.Count != 0)
             {
                 // 用于指定在执行批量写入操作时，是否要按照指定的顺序执行这些操作（false：并行删除）
                 var bulkWriteOptions = new BulkWriteOptions { IsOrdered = false };
                 await _collection.BulkWriteAsync(bulkWrites, bulkWriteOptions);
             }
+        }
+
+        /// <summary>
+        /// 更新 MTime 属性
+        /// </summary>
+        /// <param name="entity">需更新的实体</param>
+        private static void UpdateMTime(T entity)
+        {
+            var mtimeProperty = entity.GetType().GetProperty(nameof(BaseEntity.MTime));
+            if (mtimeProperty != null && mtimeProperty.PropertyType == typeof(DateTime))
+                mtimeProperty.SetValue(entity, DateTime.UtcNow);
         }
     }
 }
