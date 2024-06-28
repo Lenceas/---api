@@ -8,16 +8,15 @@ namespace MorningStar
     /// </summary>
     public class AppSettings
     {
-        public static IConfiguration? Configuration { get; set; }
+        public static IConfiguration Configuration { get; set; }
 
         public AppSettings()
         {
-            string Path = "appsettings.json";
-            if ((Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development").Equals("Development"))
-                Path = $"appsettings.Development.json";
+            string Path = $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json";
             Configuration = new ConfigurationBuilder()
                 .SetBasePath(Environment.CurrentDirectory)
-                .Add(new JsonConfigurationSource { Path = Path, Optional = false, ReloadOnChange = true }).Build();
+                .Add(new JsonConfigurationSource { Path = Path, Optional = false, ReloadOnChange = true })
+                .Build();
         }
 
         /// <summary>

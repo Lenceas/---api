@@ -16,8 +16,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.26.0" />
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.159" />
+    <PackageReference Include="MongoDB.Driver" Version="2.27.0" />
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.160" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,6 +1,5 @@
-﻿using MongoDB.Driver;
-using MorningStar.Model;
-using System.Linq.Expressions;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using System.Reflection;
 
 namespace MorningStar.Repository
 {
@@ -98,7 +97,8 @@ namespace MorningStar.Repository
         /// <returns></returns>
         public async Task InsertAsync(T entity)
         {
-            await _collection.InsertOneAsync(entity);
+            var en = SortEntityProperties(entity);
+            await _collection.InsertOneAsync(en);
         }
 
         /// <summary>
@@ -108,7 +108,8 @@ namespace MorningStar.Repository
         /// <returns></returns>
         public async Task InsertRangeAsync(List<T> entities)
         {
-            await _collection.InsertManyAsync(entities);
+            var list = SortEntityProperties(entities);
+            await _collection.InsertManyAsync(list);
         }
 
         /// <summary>
@@ -179,9 +180,56 @@ namespace MorningStar.Repository
         /// <param name="entity">需更新的实体</param>
         private static void UpdateMTime(T entity)
         {
-            var mtimeProperty = entity.GetType().GetProperty(nameof(BaseEntity.MTime));
+            var mtimeProperty = entity.GetType().GetProperty(nameof(BaseMySqlEntity.MTime));
             if (mtimeProperty != null && mtimeProperty.PropertyType == typeof(DateTime))
                 mtimeProperty.SetValue(entity, DateTime.UtcNow);
+        }
+
+        /// <summary>
+        /// 自定义排序（解决实体基类BsonElement(Order = 1)不生效永远排在子类前面的问题）
+        /// </summary>
+        /// <param name="entity">实体</param>
+        /// <returns></returns>
+        private static T SortEntityProperties(T entity)
+        {
+            var properties = typeof(T).GetProperties()
+                .Select(prop => new
+                {
+                    PropertyInfo = prop,
+                    Order = prop.GetCustomAttribute<BsonElementAttribute>()?.Order ?? 0
+                })
+                .OrderBy(prop => prop.Order)
+                .ToList();
+            T sortedEntity = Activator.CreateInstance<T>();
+            foreach (var propInfo in properties)
+                propInfo.PropertyInfo.SetValue(sortedEntity, propInfo.PropertyInfo.GetValue(entity));
+            return sortedEntity;
+        }
+
+        /// <summary>
+        /// 自定义排序（解决实体基类BsonElement(Order = 1)不生效永远排在子类前面的问题）
+        /// </summary>
+        /// <param name="entities">实体集合</param>
+        /// <returns></returns>
+        public static List<T> SortEntityProperties(List<T> entities)
+        {
+            var sortedEntities = new List<T>();
+            foreach (var entity in entities)
+            {
+                var properties = typeof(T).GetProperties()
+                    .Select(prop => new
+                    {
+                        PropertyInfo = prop,
+                        Order = prop.GetCustomAttribute<BsonElementAttribute>()?.Order ?? 0
+                    })
+                    .OrderBy(prop => prop.Order)
+                    .ToList();
+                T sortedEntity = Activator.CreateInstance<T>();
+                foreach (var propInfo in properties)
+                    propInfo.PropertyInfo.SetValue(sortedEntity, propInfo.PropertyInfo.GetValue(entity));
+                sortedEntities.Add(sortedEntity);
+            }
+            return sortedEntities;
         }
     }
 }

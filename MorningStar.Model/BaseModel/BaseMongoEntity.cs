@@ -1,7 +1,4 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-
-namespace MorningStar.Model
+﻿namespace MorningStar.Model
 {
     /// <summary>
     /// Mongo实体基类
@@ -11,14 +8,13 @@ namespace MorningStar.Model
         /// <summary>
         /// 主键
         /// </summary>
-        [BsonId]
-        [BsonRepresentation(BsonType.Int64), Description("主键"), BsonElement(Order = -99)]
+        [Description("主键"), BsonId, BsonRepresentation(BsonType.Int64), BsonElement(Order = -99)]
         public long ID { get; set; }
 
         /// <summary>
         /// 备注
         /// </summary>
-        [Description("备注"), BsonElement(Order = 92)]
+        [Description("备注"), BsonElement(Order = 91)]
         public string Remark { get; set; } = string.Empty;
 
         /// <summary>

@@ -18,8 +18,9 @@ namespace MorningStar.Extension
         public static void AddSerilogSetup(this IServiceCollection services, IWebHostEnvironment webHostEnvironment, out Serilog.ILogger log)
         {
             var logger = log = new LoggerConfiguration()
+                               .ReadFrom.Configuration(AppSettings.Configuration)
                                // 设置日志记录的最低级别。
-                               .MinimumLevel.Information()
+                               //.MinimumLevel.Information()
                                // 可以对特定命名空间或类的日志级别进行覆盖。
                                //.MinimumLevel.Override("Microsoft", LogEventLevel.Information)
                                // 使用此方法可以在日志消息中添加上下文信息，如请求ID、用户信息等。

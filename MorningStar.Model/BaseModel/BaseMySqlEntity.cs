@@ -1,9 +1,9 @@
 ﻿namespace MorningStar.Model
 {
     /// <summary>
-    /// 实体基类
+    /// MySql实体基类
     /// </summary>
-    public class BaseEntity
+    public class BaseMySqlEntity
     {
         /// <summary>
         /// 主键
