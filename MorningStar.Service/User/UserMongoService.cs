@@ -66,12 +66,12 @@
                     // todo:待赋值
                     RoleName = string.Empty,
                     Token = jwtToken,
-                    ExpiredMinuteTime = Convert.ToInt32(AppSettings.Get("Jwt:ExpiryInMinutes"))
+                    ExpiredMinuteTime = ConfigHelper.JwtExpiryInMinutes
                 };
             }
             else throw new Exception("验证码错误或已过期，请点击验证码刷新并重新登录！");
         }
 
-        #endregion 业务
+        #endregion
     }
 }

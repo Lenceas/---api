@@ -99,7 +99,7 @@ Console.WriteLine();
 log.Information("************ 容器服务注册完毕 ************");
 Console.WriteLine();
 
-#endregion 将服务添加到容器中
+#endregion
 
 var app = builder.Build();
 
@@ -160,4 +160,4 @@ Console.WriteLine();
 
 app.Run();
 
-#endregion 配置HTTP请求管道
+#endregion

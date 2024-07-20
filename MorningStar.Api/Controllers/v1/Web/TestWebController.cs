@@ -82,7 +82,7 @@
             }
         }
 
-        #endregion 缓存
+        #endregion
 
         #region MySql
 
@@ -180,7 +180,7 @@
             }
         }
 
-        #endregion MySql
+        #endregion
 
         #region Mongo
 
@@ -278,6 +278,6 @@
             }
         }
 
-        #endregion Mongo
+        #endregion
     }
 }

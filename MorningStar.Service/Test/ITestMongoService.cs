@@ -41,6 +41,6 @@
         /// <returns></returns>
         Task DeleteTest(long id);
 
-        #endregion 业务
+        #endregion
     }
 }

@@ -15,7 +15,7 @@ namespace MorningStar.Common
         /// <returns></returns>
         public static string GenerateJwtToken(long uid, string name)
         {
-            var secretKey = AppSettings.Get("Jwt:SecretKey");
+            var secretKey = ConfigHelper.JwtSecretKey;
             if ((Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development").Equals("Production"))
                 secretKey = Environment.GetEnvironmentVariable("JWT_SECRETKEY") ?? string.Empty;
             if (string.IsNullOrEmpty(secretKey)) throw new Exception("生成JwtToken错误：secretKey为空！");
@@ -28,10 +28,10 @@ namespace MorningStar.Common
                 new Claim(ClaimTypes.Name, name),
             };
             var token = new JwtSecurityToken(
-                AppSettings.Get("Jwt:Issuer"),
-                AppSettings.Get("Jwt:Audience"),
+                ConfigHelper.JwtIssuer,
+                ConfigHelper.JwtAudience,
                 claims,
-                expires: DateTime.Now.AddMinutes(Convert.ToInt32(AppSettings.Get("Jwt:ExpiryInMinutes"))),
+                expires: DateTime.Now.AddMinutes(ConfigHelper.JwtExpiryInMinutes),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

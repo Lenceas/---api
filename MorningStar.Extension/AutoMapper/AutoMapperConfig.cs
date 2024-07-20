@@ -25,7 +25,7 @@
                 .ForMember(_ => _.CTime, _ => _.MapFrom(
                     src => src.CTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")));
 
-            #endregion TestMySqlEntity >> TestMySqlPageWebModel
+            #endregion
 
             #region TestMySqlEntity >> TestMySqlDetailWebModel
 
@@ -38,11 +38,11 @@
                 .ForMember(_ => _.CTime, _ => _.MapFrom(
                     src => src.CTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")));
 
-            #endregion TestMySqlEntity >> TestMySqlDetailWebModel
+            #endregion
 
-            #endregion TestMySqlEntity
+            #endregion
 
-            #endregion MySql
+            #endregion
 
             #region Mongo
 
@@ -59,7 +59,7 @@
                 .ForMember(_ => _.CTime, _ => _.MapFrom(
                     src => src.CTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")));
 
-            #endregion TestMongoEntity >> TestMongoPageWebModel
+            #endregion
 
             #region TestMongoEntity >> TestMongoDetailWebModel
 
@@ -72,11 +72,11 @@
                 .ForMember(_ => _.CTime, _ => _.MapFrom(
                     src => src.CTime.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")));
 
-            #endregion TestMongoEntity >> TestMongoDetailWebModel
+            #endregion
 
-            #endregion TestMongoEntity
+            #endregion
 
-            #endregion Mongo
+            #endregion
         }
     }
 }

@@ -11,7 +11,7 @@ namespace MorningStar.Extension
     {
         public static void AddAuthorizationSetup(this IServiceCollection services)
         {
-            var secretKey = AppSettings.Get("Jwt:SecretKey");
+            var secretKey = ConfigHelper.JwtSecretKey;
             if ((Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development").Equals("Production"))
                 secretKey = Environment.GetEnvironmentVariable("JWT_SECRETKEY") ?? string.Empty;
             if (string.IsNullOrEmpty(secretKey)) throw new Exception("容器服务：【Authorization】注册错误：secretKey为空！");
@@ -29,9 +29,9 @@ namespace MorningStar.Extension
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
-                    ValidIssuer = AppSettings.Get("Jwt:Issuer"),
+                    ValidIssuer = ConfigHelper.JwtIssuer,
                     ValidateAudience = true,
-                    ValidAudience = AppSettings.Get("Jwt:Audience"),
+                    ValidAudience = ConfigHelper.JwtAudience,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = signingKey,
                     ValidateLifetime = true,

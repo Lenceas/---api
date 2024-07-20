@@ -37,9 +37,27 @@
             }
         }
 
-        #endregion 数据库配置
+        /// <summary>
+        /// Redis数据库连接字符串
+        /// </summary>
+        public static string RedisConnectionString
+        {
+            get
+            {
+                return AppSettings.Get("DataBase:Redis:ConnectionString");
+            }
+        }
 
-        #region 用户权限配置
+        /// <summary>
+        /// Redis键名前缀
+        /// </summary>
+        public static string RedisInstanceName
+        {
+            get
+            {
+                return AppSettings.Get("DataBase:Redis:InstanceName");
+            }
+        }
 
         /// <summary>
         /// 登录RedisKey
@@ -48,7 +66,7 @@
         {
             get
             {
-                return AppSettings.Get("Redis:TokenName");
+                return AppSettings.Get("DataBase:Redis:TokenName");
             }
         }
 
@@ -59,10 +77,58 @@
         {
             get
             {
-                return AppSettings.Get("Redis:CaptchaName");
+                return AppSettings.Get("DataBase:Redis:CaptchaName");
             }
         }
 
-        #endregion 用户权限配置
+        #endregion
+
+        #region 用户权限配置
+
+        /// <summary>
+        /// JWT鉴权发行人
+        /// </summary>
+        public static string JwtIssuer
+        {
+            get
+            {
+                return AppSettings.Get("Jwt:Issuer");
+            }
+        }
+
+        /// <summary>
+        /// JWT鉴权接收人
+        /// </summary>
+        public static string JwtAudience
+        {
+            get
+            {
+                return AppSettings.Get("Jwt:Audience");
+            }
+        }
+
+        /// <summary>
+        /// JWT鉴权密钥
+        /// </summary>
+        public static string JwtSecretKey
+        {
+            get
+            {
+                return AppSettings.Get("Jwt:SecretKey");
+            }
+        }
+
+        /// <summary>
+        /// JWT鉴权过期分钟,默认120分钟
+        /// </summary>
+        public static int JwtExpiryInMinutes
+        {
+            get
+            {
+                return Convert.ToInt32(AppSettings.Get("Jwt:ExpiryInMinutes") ?? "120");
+            }
+        }
+
+        #endregion
     }
 }

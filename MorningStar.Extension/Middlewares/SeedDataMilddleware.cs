@@ -47,9 +47,9 @@ namespace MorningStar.Extension
                 new TestMySqlService().InitDatas();
                 log.Information($"{CommonHelper.GetClassDescription(typeof(TestMySqlEntity))} {nameof(TestMySqlEntity)} 数据初始化成功！");
 
-                #endregion 测试MySql表 TestMySqlEntity
+                #endregion
 
-                #endregion mysql
+                #endregion
 
                 #region mongo
 
@@ -59,7 +59,7 @@ namespace MorningStar.Extension
                 new TestMongoService().InitDatas();
                 log.Information($"{CommonHelper.GetClassDescription(typeof(TestMongoEntity))} {nameof(TestMongoEntity)} 数据初始化成功！");
 
-                #endregion 测试Mongo表 TestMongoEntity
+                #endregion
 
                 #region 用户表 UserMongoEntity
 
@@ -67,9 +67,9 @@ namespace MorningStar.Extension
                 new UserMongoService().InitDatas();
                 log.Information($"{CommonHelper.GetClassDescription(typeof(UserMongoEntity))} {nameof(UserMongoEntity)} 数据初始化成功！");
 
-                #endregion 用户表 UserMongoEntity
+                #endregion
 
-                #endregion mongo
+                #endregion
 
                 Console.WriteLine();
                 log.Information("表数据初始化完成！");
