@@ -11,7 +11,7 @@
         {
             get
             {
-                return AppSettings.Get("DataBase:Mysql") ?? string.Empty;
+                return AppSettings.Get("DataBase:Mysql");
             }
         }
 
@@ -22,7 +22,7 @@
         {
             get
             {
-                return AppSettings.Get("DataBase:Mongo:ConnectionString") ?? string.Empty;
+                return AppSettings.Get("DataBase:Mongo:ConnectionString");
             }
         }
 
@@ -33,7 +33,7 @@
         {
             get
             {
-                return AppSettings.Get("DataBase:Mongo:DatabaseName") ?? string.Empty;
+                return AppSettings.Get("DataBase:Mongo:DatabaseName");
             }
         }
 
@@ -44,7 +44,7 @@
         {
             get
             {
-                return AppSettings.Get("DataBase:Redis:ConnectionString") ?? string.Empty;
+                return AppSettings.Get("DataBase:Redis:ConnectionString");
             }
         }
 
@@ -55,7 +55,7 @@
         {
             get
             {
-                return AppSettings.Get("DataBase:Redis:InstanceName") ?? string.Empty;
+                return AppSettings.Get("DataBase:Redis:InstanceName");
             }
         }
 
@@ -66,7 +66,7 @@
         {
             get
             {
-                return AppSettings.Get("DataBase:Redis:TokenName") ?? string.Empty;
+                return AppSettings.Get("DataBase:Redis:TokenName");
             }
         }
 
@@ -77,7 +77,7 @@
         {
             get
             {
-                return AppSettings.Get("DataBase:Redis:CaptchaName") ?? string.Empty;
+                return AppSettings.Get("DataBase:Redis:CaptchaName");
             }
         }
 
@@ -92,7 +92,7 @@
         {
             get
             {
-                return AppSettings.Get("Jwt:Issuer") ?? string.Empty;
+                return AppSettings.Get("Jwt:Issuer");
             }
         }
 
@@ -103,7 +103,7 @@
         {
             get
             {
-                return AppSettings.Get("Jwt:Audience") ?? string.Empty;
+                return AppSettings.Get("Jwt:Audience");
             }
         }
 
@@ -114,7 +114,7 @@
         {
             get
             {
-                return AppSettings.Get("Jwt:SecretKey") ?? string.Empty;
+                return AppSettings.Get("Jwt:SecretKey");
             }
         }
 

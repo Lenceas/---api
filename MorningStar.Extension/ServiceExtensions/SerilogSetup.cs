@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Logging;
+using MongoDB.Driver.Core.Configuration;
 using Serilog;
 
 namespace MorningStar.Extension
@@ -17,12 +18,18 @@ namespace MorningStar.Extension
         /// <param name="log"></param>
         public static void AddSerilogSetup(this IServiceCollection services, IWebHostEnvironment webHostEnvironment, out Serilog.ILogger log)
         {
+            var mysqlConnectionString = ConfigHelper.MySqlConnectionString;
+            if ((Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development").Equals("Production"))
+                mysqlConnectionString = (Environment.GetEnvironmentVariable("DATABASE_MYSQL") ?? string.Empty).Replace("\"", "");
             var logger = log = new LoggerConfiguration()
                                .ReadFrom.Configuration(AppSettings.Configuration)
                                // 设置日志记录的最低级别。
                                //.MinimumLevel.Information()
                                // 可以对特定命名空间或类的日志级别进行覆盖。
-                               //.MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                               //.MinimumLevel.Override("Microsoft", Serilog.Events.LogEventLevel.Information)
+                               //.MinimumLevel.Override("Microsoft.AspNetCore", Serilog.Events.LogEventLevel.Warning)
+                               //.MinimumLevel.Override("System", Serilog.Events.LogEventLevel.Warning)
+                               //.MinimumLevel.Override("System.Net.Http.HttpClient", Serilog.Events.LogEventLevel.Warning)
                                // 使用此方法可以在日志消息中添加上下文信息，如请求ID、用户信息等。
                                .Enrich.FromLogContext()
                                // 将日志消息输出到控制台。
@@ -39,7 +46,7 @@ namespace MorningStar.Extension
                                 // 将日志消息写入 MySql 数据库
                                 .WriteTo.Async(_ => _.MySQL(
                                     // 用于连接 MySQL 数据库的连接字符串。它包含数据库服务器地址、数据库名称、用户名、密码等信息。
-                                    ConfigHelper.MySqlConnectionString,
+                                    mysqlConnectionString,
                                     // 存储日志记录的 MySQL 数据库表的名称。如果没有指定，默认使用 "Logs"。
                                     "Logs",
                         // 设置要记录的最低日志级别。只有级别等于或高于此级别的日志事件才会被写入 MySQL。常见级别有 Verbose、Debug、Information、Warning、Error、Fatal。
