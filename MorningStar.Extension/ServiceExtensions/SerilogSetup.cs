@@ -76,9 +76,16 @@ namespace MorningStar.Extension
                                //     new JsonFormatter(renderMessage: true)
                                //    ))
                                // 将日志消息发送到 Seq 日志服务器。
-                               //.WriteTo.Seq()
+                               //.WriteTo.Async(_ => _.Seq(
+                               //    // 记录事件的Seq服务器的基本URL。
+                               //    ""
+                               //    ))
                                // 将日志消息发送到 Elasticsearch 服务器。
-                               //.WriteTo.Elasticsearch()
+                               //.WriteTo.Async(_ => _.Elasticsearch(new ElasticsearchSinkOptions()
+                               //{
+                               //    //
+                               //    MinimumLevel = Serilog.Events.LogEventLevel.Information
+                               //}))
                                // 将日志消息通过 HTTP POST 请求发送到指定的 URL。
                                //.WriteTo.Http()
                                // 通过自定义的方式将日志消息输出到其他输出源。

@@ -20,7 +20,7 @@ namespace MorningStar.Extension
                 typeof(ApiVersions).GetEnumNames().OrderBy(e => e).ToList().ForEach(version =>
                 {
                     c.SwaggerEndpoint($"/swagger/{version}/swagger.json", $"晨星博客 {version}");
-                    c.SupportedSubmitMethods(new[] { SubmitMethod.Get, SubmitMethod.Post, SubmitMethod.Put, SubmitMethod.Delete });
+                    c.SupportedSubmitMethods([SubmitMethod.Get, SubmitMethod.Post, SubmitMethod.Put, SubmitMethod.Delete]);
                     c.RoutePrefix = string.Empty;
 
                     // 添加 MiniProfiler 显示JS
