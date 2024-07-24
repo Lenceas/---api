@@ -81,6 +81,28 @@
             }
         }
 
+        /// <summary>
+        /// 记录事件的Seq服务器的基本URL
+        /// </summary>
+        public static string SeqServerUrl
+        {
+            get
+            {
+                return AppSettings.Get("DataBase:Seq:ServerUrl");
+            }
+        }
+
+        /// <summary>
+        /// Seq API密钥，用于向Seq服务器验证客户端
+        /// </summary>
+        public static string SeqApiKey
+        {
+            get
+            {
+                return AppSettings.Get("DataBase:Seq:ApiKey");
+            }
+        }
+
         #endregion
 
         #region 用户权限配置

@@ -3,23 +3,36 @@
     /// <summary>
     /// 测试数据接口
     /// </summary>
-    /// <param name="log"></param>
-    /// <param name="mapper"></param>
-    /// <param name="mCache"></param>
-    /// <param name="dCache"></param>
-    /// <param name="testMySqlService"></param>
-    /// <param name="testMongoService"></param>
     [CustomRoute(ApiVersions.v1)]
     [AllowAnonymous]
-    public class TestWebController(
-        Serilog.ILogger log,
-        IMapper mapper,
-        IMemoryCache mCache,
-        IDistributedCache dCache,
-        ITestMySqlService testMySqlService,
-        ITestMongoService testMongoService
-        ) : BaseApiController
+    public class TestWebController : BaseApiController
     {
+        #region 构造函数
+
+        private readonly IMapper _mapper;
+        private readonly IMemoryCache _mCache;
+        private readonly IDistributedCache _dCache;
+        private readonly ITestMySqlService _testMySqlService;
+        private readonly ITestMongoService _testMongoService;
+
+        public TestWebController(
+            Serilog.ILogger log,
+            IMapper mapper,
+            IMemoryCache mCache,
+            IDistributedCache dCache,
+            ITestMySqlService testMySqlService,
+            ITestMongoService testMongoService
+        ) : base(log)
+        {
+            _mapper = mapper;
+            _mCache = mCache;
+            _dCache = dCache;
+            _testMySqlService = testMySqlService;
+            _testMongoService = testMongoService;
+        }
+
+        #endregion
+
         #region 缓存
 
         /// <summary>
@@ -32,7 +45,7 @@
         {
             try
             {
-                return ApiResult(await mCache.GetOrCreateAsync("MemoryCache", async entry =>
+                return ApiResult(await _mCache.GetOrCreateAsync("MemoryCache", async entry =>
                 {
                     entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(2);
                     await Task.Delay(TimeSpan.FromSeconds(0));
@@ -41,9 +54,7 @@
             }
             catch (Exception ex)
             {
-                log.Error(ex,
-                    $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(GetMemoryCache)}");
-                return ApiErrorResult(ex.Message);
+                return ApiErrorResult(ex, "获取Memory缓存数据");
             }
         }
 
@@ -57,11 +68,11 @@
         {
             try
             {
-                var r = await dCache.GetStringAsync("Redis");
+                var r = await _dCache.GetStringAsync("Redis");
                 if (string.IsNullOrEmpty(r))
                 {
                     r = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-                    await dCache.SetStringAsync("Redis", r
+                    await _dCache.SetStringAsync("Redis", r
                         , new DistributedCacheEntryOptions()
                         {
                             // 设置缓存项的绝对过期时间相对于当前时间的间隔
@@ -76,9 +87,7 @@
             }
             catch (Exception ex)
             {
-                log.Error(ex,
-                    $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(GetRedisCache)}");
-                return ApiErrorResult(ex.Message);
+                return ApiErrorResult(ex, "获取Redis缓存数据");
             }
         }
 
@@ -98,20 +107,18 @@
         {
             try
             {
-                var r = await testMySqlService.GetPage(pageIndex, pageSize);
+                var r = await _testMySqlService.GetPage(pageIndex, pageSize);
                 return ApiTResult(new PageViewModel<TestMySqlPageWebModel>()
                 {
                     PageIndex = r.PageIndex,
                     PageSize = r.PageSize,
                     TotalCount = r.TotalCount,
-                    ViewModelList = mapper.Map<List<TestMySqlPageWebModel>>(r.ViewModelList)
+                    ViewModelList = _mapper.Map<List<TestMySqlPageWebModel>>(r.ViewModelList)
                 });
             }
             catch (Exception ex)
             {
-                log.Error(ex,
-                    $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(GetMySqlPage)}");
-                return ApiErrorResult(ex.Message);
+                return ApiErrorResult(ex, "获取测试MySql数据分页");
             }
         }
 
@@ -126,13 +133,11 @@
         {
             try
             {
-                return ApiTResult(mapper.Map<TestMySqlDetailWebModel>(await testMySqlService.GetDetail(id)));
+                return ApiTResult(_mapper.Map<TestMySqlDetailWebModel>(await _testMySqlService.GetDetail(id)));
             }
             catch (Exception ex)
             {
-                log.Error(ex,
-                    $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(GetMySqlDetail)}");
-                return ApiErrorResult(ex.Message);
+                return ApiErrorResult(ex, "获取测试MySql数据详情");
             }
         }
 
@@ -147,14 +152,12 @@
         {
             try
             {
-                await testMySqlService.SaveTest(model);
+                await _testMySqlService.SaveTest(model);
                 return ApiResult(true);
             }
             catch (Exception ex)
             {
-                log.Error(ex,
-                    $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(SaveMySqlTest)}");
-                return ApiErrorResult(ex.Message);
+                return ApiErrorResult(ex, "保存测试MySql数据");
             }
         }
 
@@ -169,14 +172,12 @@
         {
             try
             {
-                await testMySqlService.DeleteTest(id);
+                await _testMySqlService.DeleteTest(id);
                 return ApiResult(true);
             }
             catch (Exception ex)
             {
-                log.Error(ex,
-                    $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(DeleteMySqlTest)}");
-                return ApiErrorResult(ex.Message);
+                return ApiErrorResult(ex, "删除测试MySql数据");
             }
         }
 
@@ -196,20 +197,18 @@
         {
             try
             {
-                var r = await testMongoService.GetPage(pageIndex, pageSize);
+                var r = await _testMongoService.GetPage(pageIndex, pageSize);
                 return ApiTResult(new PageViewModel<TestMongoPageWebModel>()
                 {
                     PageIndex = r.PageIndex,
                     PageSize = r.PageSize,
                     TotalCount = r.TotalCount,
-                    ViewModelList = mapper.Map<List<TestMongoPageWebModel>>(r.ViewModelList)
+                    ViewModelList = _mapper.Map<List<TestMongoPageWebModel>>(r.ViewModelList)
                 });
             }
             catch (Exception ex)
             {
-                log.Error(ex,
-                    $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(GetMongoPage)}");
-                return ApiErrorResult(ex.Message);
+                return ApiErrorResult(ex, "获取测试Mongo数据分页");
             }
         }
 
@@ -224,13 +223,11 @@
         {
             try
             {
-                return ApiTResult(mapper.Map<TestMongoDetailWebModel>(await testMongoService.GetDetail(id)));
+                return ApiTResult(_mapper.Map<TestMongoDetailWebModel>(await _testMongoService.GetDetail(id)));
             }
             catch (Exception ex)
             {
-                log.Error(ex,
-                    $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(GetMongoDetail)}");
-                return ApiErrorResult(ex.Message);
+                return ApiErrorResult(ex, "获取测试Mongo数据详情");
             }
         }
 
@@ -245,14 +242,12 @@
         {
             try
             {
-                await testMongoService.SaveTest(model);
+                await _testMongoService.SaveTest(model);
                 return ApiResult(true);
             }
             catch (Exception ex)
             {
-                log.Error(ex,
-                    $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(SaveMongoTest)}");
-                return ApiErrorResult(ex.Message);
+                return ApiErrorResult(ex, "保存测试Mongo数据");
             }
         }
 
@@ -267,14 +262,12 @@
         {
             try
             {
-                await testMongoService.DeleteTest(id);
+                await _testMongoService.DeleteTest(id);
                 return ApiResult(true);
             }
             catch (Exception ex)
             {
-                log.Error(ex,
-                    $"{nameof(TestWebController).Replace("Controller", "")}/{nameof(DeleteMongoTest)}");
-                return ApiErrorResult(ex.Message);
+                return ApiErrorResult(ex, "删除测试Mongo数据");
             }
         }
 
