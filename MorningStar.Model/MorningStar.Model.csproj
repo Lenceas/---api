@@ -16,11 +16,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MongoDB.Driver" Version="2.27.0" />
-    <PackageReference Include="SqlSugarCore" Version="5.1.4.162" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\MorningStar.Common\MorningStar.Common.csproj" />
   </ItemGroup>
 
