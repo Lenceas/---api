@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton(new AppSettings());
 
 // 注册 Serilog 服务
-builder.Services.AddSerilogSetup(builder.Environment, out Serilog.ILogger log);
+builder.Services.AddSerilogSetup(out Serilog.ILogger log);
 log.Debug("************ 开始注册容器服务 ************");
 
 log.Debug("容器服务：【Serilog】已注册！");

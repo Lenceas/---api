@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Serilog;
 
 namespace MorningStar.Extension
@@ -13,18 +12,17 @@ namespace MorningStar.Extension
         /// 注册【Serilog】容器服务
         /// </summary>
         /// <param name="services"></param>
-        /// <param name="webHostEnvironment"></param>
         /// <param name="log"></param>
-        public static void AddSerilogSetup(this IServiceCollection services, IWebHostEnvironment webHostEnvironment, out Serilog.ILogger log)
+        public static void AddSerilogSetup(this IServiceCollection services, out Serilog.ILogger log)
         {
             var mysqlConnectionString = ConfigHelper.MySqlConnectionString;
-            var seqServerUrl = ConfigHelper.SeqServerUrl;
-            var seqApiKey = ConfigHelper.SeqApiKey;
+            //var seqServerUrl = ConfigHelper.SeqServerUrl;
+            //var seqApiKey = ConfigHelper.SeqApiKey;
             if ((Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Development").Equals("Production"))
             {
                 mysqlConnectionString = (Environment.GetEnvironmentVariable("DATABASE_MYSQL") ?? string.Empty).Replace("\"", "");
-                seqServerUrl = (Environment.GetEnvironmentVariable("DATABASE_SEQ_SERVERURL") ?? string.Empty).Replace("\"", "");
-                seqApiKey = (Environment.GetEnvironmentVariable("DATABASE_SEQ_APIKEY") ?? string.Empty).Replace("\"", "");
+                //seqServerUrl = (Environment.GetEnvironmentVariable("DATABASE_SEQ_SERVERURL") ?? string.Empty).Replace("\"", "");
+                //seqApiKey = (Environment.GetEnvironmentVariable("DATABASE_SEQ_APIKEY") ?? string.Empty).Replace("\"", "");
             }
             var logger = log = new LoggerConfiguration()
                                .ReadFrom.Configuration(AppSettings.Configuration)
@@ -81,34 +79,34 @@ namespace MorningStar.Extension
                                //     new JsonFormatter(renderMessage: true)
                                //    ))
                                // 将日志消息发送到 Seq 日志服务器。
-                               .WriteTo.Async(_ => _.Seq(
-                                  // 记录事件的Seq服务器的基本URL。
-                                  seqServerUrl,
-                                  // 将事件写入接收器所需的最低日志事件级别。
-                                  Serilog.Events.LogEventLevel.Information,
-                                   // 单批中要发布的最大事件数。
-                                   1000,
-                                   // 检查事件批之间的等待时间。
-                                   null,
-                                   // Seq API密钥，用于向Seq服务器验证客户端。
-                                   seqApiKey,
-                                   // 一组文件的路径，这些文件将用于缓冲事件，直到它们可以在网络上成功传输。将使用模式bufferBaseFilename*.json创建单个文件，该模式不应与同一目录中的任何其他文件名冲突。
-                                   null,
-                                   // 允许特定日期的缓冲区日志文件增长到的最大数据量（以字节为单位）。默认情况下，不会应用任何限制。
-                                   null,
-                                   // 事件的JSON表示在丢弃而不是发送到Seq服务器之前可能占用的最大大小（以字节为单位）。指定null表示无限制。默认值为265 KB。
-                                   262144,
-                                   // 如果提供，开关将根据Seq服务器对相应API密钥的级别设置进行更新。将相同的密钥传递给MinimumLevel。ControlledBy（）将使整个管道受到动态控制。不要使用此设置指定restrictdToMinimumLevel。
-                                   null,
-                                   // 用于构建将日志消息发送到Seq的HttpClient。
-                                   null,
-                                   // 用于存储失败请求的字节数的软限制。该限制是软的，因为任何单个错误有效载荷都可以超过它，但在这种情况下，只会保留单个错误有效负载。
-                                   null,
-                                   // 在等待将事件发送到Seq时，内存中保存的最大事件数。超过此限制，活动将被取消。默认值为100000。对耐用原木运输没有影响。
-                                   100000,
-                                   // Serilog。格式化。ITextFormatter，用于格式化（换行符分隔的CLEF/JSON）有效载荷。实验。
-                                   null
-                                   ))
+                               //.WriteTo.Async(_ => _.Seq(
+                               //   // 记录事件的Seq服务器的基本URL。
+                               //   seqServerUrl,
+                               //   // 将事件写入接收器所需的最低日志事件级别。
+                               //   Serilog.Events.LogEventLevel.Information,
+                               //    // 单批中要发布的最大事件数。
+                               //    1000,
+                               //    // 检查事件批之间的等待时间。
+                               //    null,
+                               //    // Seq API密钥，用于向Seq服务器验证客户端。
+                               //    seqApiKey,
+                               //    // 一组文件的路径，这些文件将用于缓冲事件，直到它们可以在网络上成功传输。将使用模式bufferBaseFilename*.json创建单个文件，该模式不应与同一目录中的任何其他文件名冲突。
+                               //    null,
+                               //    // 允许特定日期的缓冲区日志文件增长到的最大数据量（以字节为单位）。默认情况下，不会应用任何限制。
+                               //    null,
+                               //    // 事件的JSON表示在丢弃而不是发送到Seq服务器之前可能占用的最大大小（以字节为单位）。指定null表示无限制。默认值为265 KB。
+                               //    262144,
+                               //    // 如果提供，开关将根据Seq服务器对相应API密钥的级别设置进行更新。将相同的密钥传递给MinimumLevel。ControlledBy（）将使整个管道受到动态控制。不要使用此设置指定restrictdToMinimumLevel。
+                               //    null,
+                               //    // 用于构建将日志消息发送到Seq的HttpClient。
+                               //    null,
+                               //    // 用于存储失败请求的字节数的软限制。该限制是软的，因为任何单个错误有效载荷都可以超过它，但在这种情况下，只会保留单个错误有效负载。
+                               //    null,
+                               //    // 在等待将事件发送到Seq时，内存中保存的最大事件数。超过此限制，活动将被取消。默认值为100000。对耐用原木运输没有影响。
+                               //    100000,
+                               //    // Serilog。格式化。ITextFormatter，用于格式化（换行符分隔的CLEF/JSON）有效载荷。实验。
+                               //    null
+                               //    ))
                                // 将日志消息发送到 Elasticsearch 服务器。
                                //.WriteTo.Async(_ => _.Elasticsearch(new ElasticsearchSinkOptions()
                                //{
